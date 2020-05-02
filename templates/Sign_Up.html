@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Sign up</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+  </head> 
   <body>
-    <h1>Đơn đăng kí!</h1>
+    <h1 id='don_dang_ki'>Đơn đăng kí!</h1>
     <div id='Sign_up_box'> 
       <form method="POST" action="{{ url_for('form') }}">
         {{ form.csrf_token }}

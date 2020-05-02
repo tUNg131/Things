@@ -1,10 +1,11 @@
 body {
     font-family: monospace;
     font-size: 16px;
+    background-color: aqua;
 }
 
-h1 {
-    text-align: center;
+#don_dang_ki {
+    font-size: 45px;
 }
 
 #Sign_up_box {

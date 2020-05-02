@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, EqualTo, Length, Email
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'matkhau'
 
-class loginForm(FlaskForm):
+class signUpForm(FlaskForm):
     username = StringField('Username', [InputRequired()])
     # pip install email_validator
     email = StringField('Email', [InputRequired(message='You must have username'), validators.Email()])
@@ -16,7 +16,7 @@ class loginForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def form():
-    form = loginForm()
+    form = signUpForm()
 
     if form.validate_on_submit():
         return 'You have signed up'
