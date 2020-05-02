@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Home page{% endblock %}
+
+{% block body %}
+{{ super() }}
+<h5>This is Home Page</h5>
+<h5>Click <a href="{{ url_for('login') }}">here </a>to log in</h5>
+{% endblock %}
