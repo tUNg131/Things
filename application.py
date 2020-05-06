@@ -1,11 +1,19 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, EqualTo, Length, Email
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'application'
 users = {'admin': 'admin'}
+
+class SignUpForm(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    # pip install email_validator
+    email = StringField('Email', validators=[InputRequired(message='You must have username'), Email()])
+    address = StringField('Address', validators=[InputRequired(message='You must have address')])
+    password = PasswordField('Password', validators=[InputRequired(message='You must have password')])
+    confirm = PasswordField('RepeatPassword', validators=[InputRequired(), EqualTo('password', message='Password must match')])
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
@@ -49,6 +57,13 @@ def login():
         if user.password.validation and user.username.validation:
             return redirect(url_for('success'))
     return render_template('login.html', form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignUpForm()
+    if form.validate_on_submit():
+        return 'OK!'
+    return render_template('signup.html', form=form)
 
 @app.route('/success')
 def success():
