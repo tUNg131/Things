@@ -61,7 +61,7 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    form = signUpForm()
+    form = SignUpForm()
     if form.validate_on_submit():
         return 'OK!'
     return render_template('Sign_Up.html', form=form)
