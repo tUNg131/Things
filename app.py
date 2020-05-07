@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, validators
 from wtforms.validators import InputRequired, EqualTo, Length, Email
 
 app = Flask(__name__)
@@ -60,10 +60,10 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    form = SignUpForm()
+    form = signUpForm()
     if form.validate_on_submit():
         return 'OK!'
-    return render_template('signup.html', form=form)
+    return render_template('Sign_Up.html', form=form)
 
 @app.route('/success')
 def success():
@@ -71,3 +71,4 @@ def success():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
