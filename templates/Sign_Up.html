@@ -8,7 +8,7 @@
   <body>
     <h1 id='don_dang_ki'>Đăng kí!</h1>
     <div id='Sign_up_box'> 
-      <form method="POST" action="{{ url_for('form') }}">
+      <form method="POST" action="{{ url_for('signup') }}">
         {{ form.csrf_token }}
         <div class="validate" id="username">
           {{ form.username(class="validate-inside") }}
