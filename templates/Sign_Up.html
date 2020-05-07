@@ -6,21 +6,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
   </head> 
   <body>
-    <h1 id='don_dang_ki'>Đơn đăng kí!</h1>
+    <h1 id='don_dang_ki'>Đăng kí!</h1>
     <div id='Sign_up_box'> 
       <form method="POST" action="{{ url_for('form') }}">
         {{ form.csrf_token }}
-        {{ form.username.label(class_='validate') }}
-        {{ form.username(class_='validate') }}
-        {{ form.email.label(class_='validate') }}
-        {{ form.email(class_='validate') }}
-        {{ form.address.label(class_='validate') }}
-        {{ form.address(class_='validate') }}
-        {{ form.password.label(class_='validate') }}
-        {{ form.password(class_='validate') }}
-        {{ form.confirm.label(class_='validate') }}
-        {{ form.confirm(class_='validate') }}
-        <input type="submit" value="Submit">
+        <div class="validate" id="username">
+          {{ form.username(class="validate-inside") }}
+        </div>
+        <div class="validate" id="email">
+          {{ form.email(class="validate-inside") }}
+        </div>
+        <div class="validate" id="address">
+          {{ form.address(class="validate-inside") }}
+        </div>
+        <div class="validate" id="password">
+          {{ form.password(class="validate-inside") }}
+        </div>
+        <div class="validate" id="confirm">
+          {{ form.confirm(class="validate-inside") }}
+        </div>
+        <input id="submit" type="submit" value="Submit">
       </form>
     </div>
   </body>
