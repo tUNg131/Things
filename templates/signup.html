@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block title %}Please sign up!{% endblock %}
+
+{% block body %}
+{{ super() }}
+<h1 id='don_dang_ki'>Đăng kí!</h1>
+<div id='Sign_up_box'>
+  <form method="POST" action="{{ url_for('signup') }}">
+    {{ form.csrf_token }}
+    <div class="validate" id="username">
+      {{ form.username(class="validate-inside") }}
+    </div>
+    <div class="validate" id="email">
+      {{ form.email(class="validate-inside") }}
+    </div>
+    <div class="validate" id="address">
+      {{ form.address(class="validate-inside") }}
+    </div>
+    <div class="validate" id="password">
+      {{ form.password(class="validate-inside") }}
+    </div>
+    <div class="validate" id="confirm">
+      {{ form.confirm(class="validate-inside") }}
+    </div>
+    <input id="submit" type="submit" value="Submit">
+  </form>
+</div>
+{% endblock%}

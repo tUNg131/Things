@@ -5,12 +5,13 @@ from wtforms.validators import InputRequired, EqualTo, Length, Email
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'application'
+
 users = {'admin': 'admin'}
 
-class signUpForm(FlaskForm):
+class SignUpForm(FlaskForm):
     username = StringField('Username', [InputRequired()], render_kw={"placeholder": "Username"})
     # pip install email_validator
-    email = StringField('Email', [InputRequired(message='You must have username'), validators.Email()], render_kw={"placeholder": "Email"})
+    email = StringField('Email', [InputRequired(message='You must have username'), Email()], render_kw={"placeholder": "Email"})
     address = StringField('Address', [InputRequired(message='You must have address')], render_kw={"placeholder": "Address"})
     password = PasswordField('Password', [InputRequired(message='You must have password')], render_kw={"placeholder": "Password"})
     confirm = PasswordField('Repeat Password', [InputRequired(), EqualTo('password', message='Password must match')], render_kw={"placeholder": "Repeat Password"})
