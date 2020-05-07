@@ -57,14 +57,14 @@ def login():
         user.validate()
         if user.password.validation and user.username.validation:
             return redirect(url_for('success'))
-    return render_template('login.html', form=form)
+    return render_template('Login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
     if form.validate_on_submit():
         return 'OK!'
-    return render_template('signup.html', form=form)
+    return render_template('SignUp.html', form=form)
 
 @app.route('/success')
 def success():
