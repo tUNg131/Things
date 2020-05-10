@@ -52,6 +52,7 @@ def landing():
     return render_template('landing_page.html')
 
 @app.route('/homepage')
+@login_required
 def index():
     return render_template('index.html')
 
