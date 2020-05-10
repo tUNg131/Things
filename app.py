@@ -71,7 +71,7 @@ def login():
         if user:
             if user.password == form.password.data: # need to do hash password
                 login_user(user)
-                return redirect_dest(fallback=url_for('/hompage'))
+                return redirect_dest(fallback=url_for('index'))
     return render_template('Login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
