@@ -44,6 +44,10 @@ class User():
             self.username.validation = False
 
 @app.route('/')
+def landing():
+    return render_template('landing_page.html')
+
+@app.route('/homepage')
 def index():
     return render_template('index.html')
 

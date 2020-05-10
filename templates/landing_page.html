@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_landing_page.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ super() }}
+Welcome to Green Hanoi
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<header>
+    <img id='Logo' src="{{ url_for('static', filename='images/Logo.png') }}">
+    <nav>
+        <span><a href="">Cách hoạt động</a></span>
+        <span><a href="">Điểm thưởng</a></span>
+    </nav>
+</header>
+{% endblock %}
