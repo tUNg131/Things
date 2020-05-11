@@ -1,0 +1,32 @@
+html {
+    font-family: 'Josefin Sans' sans-serif;
+}
+
+.flex-container {
+    display: flex;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    height: 80px;
+}
+
+#logo {
+    width: 70px;
+    height: 70px;
+    padding-left: 10px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav span {
+    display: inline-block;
+    padding-left: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}

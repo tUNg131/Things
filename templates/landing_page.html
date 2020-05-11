@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style_landing_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_landing_page.css') }}" type="text/css">
 {% endblock %}
 
 {% block title %}
@@ -11,8 +11,8 @@ Welcome to Green Hanoi
 
 {% block body %}
 {{ super() }}
-<header>
-    <img id='Logo' src="{{ url_for('static', filename='images/Logo.png') }}">
+<header class="flex-container">
+    <img id="logo" src="{{ url_for('static', filename='images/Logo.png') }}">
     <nav>
         <span><a href="">Cách hoạt động</a></span>
         <span><a href="">Điểm thưởng</a></span>
