@@ -54,14 +54,6 @@ def load_user(user_id):
 def unauthorized():
     return redirect(url_for('login', next=request.endpoint))
 
-def redirect_dest(fallback):
-    dest = request.args.get('next')
-    try:
-        dest_url = url_for(dest)
-    except:
-        return redirect(fallback)
-    return redirect(dest_url)
-
 @app.route('/')
 def landing():
     return render_template('landing_page.html')
@@ -78,10 +70,12 @@ def login():
         user = User.query.filter(User.username == form.username.data,
                                  User.password == form.password.data).first() # need to do the hash password
         if user:
-                login_user(user)
-                return redirect_dest(fallback=url_for('index'))
-        flash('Wrong username or password!')
-        return redirect(url_for('login'))
+            login_user(user)
+            print(url_for('success', next=request.args.get('next')))
+            return redirect(url_for('success', next=request.args.get('next')))
+        else:
+            flash('Wrong username or password!')
+            return redirect(url_for('login', next=request.args.get('next')))
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -99,15 +93,24 @@ def signup():
             db.session.commit()
             # todo a error catch here if insertion is not successful
             login_user(user)
-            return redirect_dest(fallback=url_for('index'))
+            return redirect(url_for('success', request.args.get('next')))
         else:
             flash(f'User {user.username} has already existed!')
-            return redirect(url_for('signup'))
+            return redirect(url_for('signup', next=request.args.get('next')))
     return render_template('signup.html', form=form)
 
 @app.route('/success')
+@login_required
 def success():
-    return render_template('success.html')
+    next = request.args.get('next', 'index')
+    # the fallback for success is index (above)
+    if next == 'success': # next == "" has to be the name of this function to prevent double redirect
+        next = 'index'
+    return render_template('success.html', next=next)
+
+@app.route('/url/<endpoint>')
+def url(endpoint):
+    return url_for(endpoint, next=endpoint)
 
 if __name__ == "__main__":
     app.run(debug=True)

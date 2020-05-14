@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>You have sucessfully login!</h1>
-    <h5>Click <a href="{{ url_for('index') }}">here </a>to get to Home Page</h5>
+    <h5>Click <a href="{{ url_for(next) }}">here </a>to be redirected</h5>
+    <!-- Redirect to next; fallback is index -->
   </body>
 </html>

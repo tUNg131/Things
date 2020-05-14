@@ -11,7 +11,7 @@
 {{ super() }}
 <h1 id='don_dang_ki'>Đăng kí!</h1>
 <div id='Sign_up_box'>
-  <form method="POST" action="{{ url_for('signup') }}">
+  <form method="POST" action="{{ url_for('signup', next=request.args.get('next')) }}">
     {{ form.hidden_tag() }}
     <div class="validate" id="username">
       {{ form.username(class="validate-inside") }}
