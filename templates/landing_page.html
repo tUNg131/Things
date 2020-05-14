@@ -19,11 +19,14 @@ Welcome to Green Hanoi
             <span><a href="">Điểm thưởng</a></span>
         </nav>
         <div id="signup-login">
-            <a href="">Đăng nhập</a>
-            <input id="signup-button" type="submit" value="Đăng kí">
+            <a href="{{ url_for('login') }}">Đăng nhập</a>
+            <form action="{{ url_for('signup') }}" method="get">
+              <button id="signup-button" type="submit">Đăng kí</button>
+            </form>
+            <!-- <input id="signup-button" type="submit" value="Đăng kí"> -->
         </div>
 </header>
-<div id="Gioi_thieu"> 
+<div id="Gioi_thieu">
     <img src="{{ url_for('static', filename='images/landingpage_first_sessions.jpg') }}">
 </div>
 {% endblock %}
