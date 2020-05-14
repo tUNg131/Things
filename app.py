@@ -11,10 +11,11 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'application'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://LeXuanTung@localhost:5432/things1'
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://LeXuanTung@localhost:5432/things1'
 # postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://rvgrjnphlwzvjd:fefede7bb2b893a43460c53ac701842ac969b1066d908d9b8f1639ec6e808d54@ec2-79-125-26-232.eu-west-1.compute.amazonaws.com:5432/d8svuqp19g214c'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://rvgrjnphlwzvjd:fefede7bb2b893a43460c53ac701842ac969b1066d908d9b8f1639ec6e808d54@ec2-79-125-26-232.eu-west-1.compute.amazonaws.com:5432/d8svuqp19g214c'
 
 db = SQLAlchemy(app)
 
@@ -34,10 +35,12 @@ class User(UserMixin, db.Model):
 class SignUpForm(FlaskForm):
     username = StringField('Username', [InputRequired()], render_kw={"placeholder": "Username"})
     # pip install email_validator
-    email = StringField('Email', [InputRequired(message='You must have username'), Email()], render_kw={"placeholder": "Email"})
+    email = StringField('Email', [InputRequired(message='You must have username'),
+                                    Email()], render_kw={"placeholder": "Email"})
     address = StringField('Address', [InputRequired(message='You must have address')], render_kw={"placeholder": "Address"})
     password = PasswordField('Password', [InputRequired(message='You must have password')], render_kw={"placeholder": "Password"})
-    confirm = PasswordField('Repeat Password', [InputRequired(), EqualTo('password', message='Password must match')], render_kw={"placeholder": "Repeat Password"})
+    confirm = PasswordField('Repeat Password', [InputRequired(),
+                                EqualTo('password', message='Password must match')], render_kw={"placeholder": "Repeat Password"})
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
