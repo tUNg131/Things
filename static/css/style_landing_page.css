@@ -1,5 +1,9 @@
 html {
-    font-family: 'Josefin Sans' sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    margin: 0px;
 }
 
 .flex-container {
@@ -10,13 +14,15 @@ header {
     width: 100%;
     position: fixed;
     z-index: 1;
-    height: 80px;
+    height: 60px;
+    border-bottom: 1px solid #6A6D75;
 }
 
 #logo {
-    width: 70px;
-    height: 70px;
-    padding-left: 10px;
+    width: 50px;
+    height: 50px;
+    padding: 5px 10px;
+    margin-left: 45px;
 }
 
 nav {
@@ -26,7 +32,54 @@ nav {
 
 nav span {
     display: inline-block;
-    padding-left: 10px;
-    text-decoration: none;
+    padding-left: 30px;
     text-transform: uppercase;
+    font-size: 13px;
+}
+
+nav span a {
+    color: #6A6D75;
+    text-decoration: none;
+}
+
+nav span a:active {
+    color: inherit;
+}
+
+#signup-login {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 45px;
+}
+
+#signup-login a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #6A6D75;
+    font-size: 13px;
+}
+
+#signup-login a:active {
+    color: inherit; 
+}
+
+#signup-button {
+    width: 110px;
+    height: 34px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    background-color: #EA672B;
+    cursor: pointer;
+    border: none;
+    color: white;
+    margin-left: 30px;
+    border-radius: 5px;
+}
+
+#Gioi_thieu img{
+    width: 100%;
+    height: auto;
+    padding-top: 60px;
 }
