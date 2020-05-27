@@ -22,14 +22,12 @@ form {
     justify-content: center;
 }
 
-.validate {
+.validate-inside {
+    display: block;
     padding: 7px;
     font-size: 14px;
     margin: 10px;
     width: 75%;
-}
-
-.validate-inside {
     border: none;
     border-bottom: 1px solid #AAA;
     transition: 0.2s ease;

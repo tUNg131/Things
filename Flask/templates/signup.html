@@ -11,23 +11,13 @@
 {{ super() }}
 <h1 id='don_dang_ki'>Đăng kí!</h1>
 <div id='Sign_up_box'>
-  <form method="POST" action="{{ url_for('signup', next=request.args.get('next')) }}">
+  <form id="sign_up_form" method="POST" action="{{ url_for('signup', next=request.args.get('next')) }}">
     {{ form.hidden_tag() }}
-    <div class="validate" id="username">
-      {{ form.username(class="validate-inside") }}
-    </div>
-    <div class="validate" id="email">
-      {{ form.email(class="validate-inside") }}
-    </div>
-    <div class="validate" id="address">
-      {{ form.address(class="validate-inside") }}
-    </div>
-    <div class="validate" id="password">
-      {{ form.password(class="validate-inside") }}
-    </div>
-    <div class="validate" id="confirm">
-      {{ form.confirm(class="validate-inside") }}
-    </div>
+    {{ form.username(class="validate-inside") }}
+    {{ form.email(class="validate-inside") }}
+    {{ form.address(class="validate-inside") }}
+    {{ form.password(class="validate-inside") }}
+    {{ form.confirm(class="validate-inside") }}
     <input id="submit" type="submit" value="Submit">
   </form>
 </div>
