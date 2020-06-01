@@ -51,6 +51,12 @@ class UserManager(BaseUserManager):
         return self._create_user(full_name, email, password, **extra_fields)
 
 class TransactionHistory(models.Manager):
+<<<<<<< HEAD
+=======
+
+    by_type_raw = '' # remember to do triple double quotes
+    by_month_raw = ''
+>>>>>>> 84440853116ab1329517931ab44d476bdaef9225
     all_grouping_methods = () # has to be a tuple
     temp_table_name = ''
 
