@@ -13,17 +13,17 @@ Welcome to Green Hanoi
 {% block body %}
 {{ super() }}
 <header class="flex-container">
-        <img id="logo" src="{{ url_for('static', filename='images/Logo.png') }}">
-        <nav>
-            <span><a href="">Cách hoạt động</a></span>
-            <span><a href="">Điểm thưởng</a></span>
-        </nav>
-        <div id="signup-login">
-            <a href="{{ url_for('login') }}">Đăng nhập</a>
-            <form action="{{ url_for('signup') }}" method="get">
-              <button id="signup-button" type="submit">Đăng kí</button>
-            </form>
-        </div>
+    <img id="logo" src="{{ url_for('static', filename='images/Logo.png') }}">
+    <nav>
+        <span><a href="">Về chúng tôi</a></span>
+        <span><a href="">Liên hệ</a></span>
+    </nav>
+    <div id="signup-login">
+        <a href="{{ url_for('login') }}">Đăng nhập</a>
+        <form action="{{ url_for('signup') }}" method="get">
+            <button id="signup-button" type="submit">Đăng kí</button>
+        </form>
+    </div>
 </header>
 <div id="Gioi_thieu">
     <img src="{{ url_for('static', filename='images/landingpage_first_sessions.jpg') }}">

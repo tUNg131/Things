@@ -1,9 +1,4 @@
-{% extends 'collect/base.html' %}
-
-{% block head %}
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
+google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -17,19 +12,9 @@
 
         var options = {
           title: 'My Daily Activities',
-          pieHole: 0.6,
+          pieHole: 0.4,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-    </script>
-{% block title %}HomePage{% endblock %}
-
-{% endblock %}
-
-{% block body %}
-
-    <div id="donutchart" style="width: 900px; height: 500px;"></div>
-
-{% endblock %}
