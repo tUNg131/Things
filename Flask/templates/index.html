@@ -13,7 +13,7 @@
 {% block body %}
 {{ super() }}
   <header class="flex-container">
-  <img id="logo" src="../Things html without django/images/Logo.png">
+  <img id="logo" src="{{ url_for('static', filename='images/logo.png') }}">
   <nav>
       <span><a href="">Về chúng tôi</a></span>
       <span><a href="">Liên hệ</a></span>
