@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_homepage.css') }}" type="text/css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/pie_chart_for_homepage.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/annotations_chart_for_homepage.js') }}"></script>
+{% endblock %}
+
+{% block title %}Home page{% endblock %}
+
+{% block body %}
+{{ super() }}
+  <header class="flex-container">
+    <img id="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+   <nav>
+      <span><a href="">Về chúng tôi</a></span>
+      <span><a href="">Liên hệ</a></span>
+    </nav>
+  </header>
+  <section id="thang-diem">
+      <div id="thang-diem-chart"></div>
+  </section>
+  <section class="flex-container" id="chart-box">
+      <div id="donutchart" style="width: 700px; height: 300px;"></div>
+      <div id='chart_div' style='width: 700px; height: 300px;'></div>
+  </section>
+{% endblock %}
