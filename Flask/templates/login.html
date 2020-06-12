@@ -1,24 +1,52 @@
 {% extends 'base.html' %}
-
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Jquery -->
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 {% endblock %}
 
-{% block title %}
-{{ super() }}
-Please log in
-{% endblock %}
+{% block title %}LOGIN{% endblock %}
 
 {% block body %}
 {{ super() }}
-<form action="{{ url_for('login', next=request.args.get('next')) }}" method="post">
-  <h2>Please Log In</h2>
-  {{ form.hidden_tag() }}
-  {{ form.username.label }}
-  {{ form.username }}
-  {{ form.password.label }}
-  {{ form.password }}
-  <button type="submit"><h5>Submit</h5></button>
-</form>
-{% endblock %}
+<div class="page-content">
+  <div class="form-v4-content">
+    <div class="form-left">
+      <h2>INFOMATION</h2>
+      <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+      <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
+      <div class="form-left-last">
+        <a href="signup.html">
+          <input type="submit" name="account" class="account" value="Don't Have An Account">
+        </a>
+      </div>
+    </div>
+    <form class="form-detail" action="#" method="post" id="myform">
+      <h2>LOGIN</h2>
+      <div class="form-row">
+        <label for="your_email">Your Email</label>
+        <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+      </div>
+      <div class="form-row">
+        <div class="form-row" id="form-row-password">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" class="input-text" required>
+        </div>
+      </div>
+      <div class="form-row-last">
+        <input type="submit" name="register" class="register" value="Login">
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script src="{{ url_for('static', filename='js/Jquery validation for signup.js') }}"></script>
+{% endblock%}
