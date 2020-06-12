@@ -12,8 +12,9 @@
 
 {% block body %}
 {{ super() }}
+  <input type="hidden" id="next_collection" name="next_collection" value="">
   <header class="flex-container">
-    <img id="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+    <img id="logo" src="{{ url_for('static', filename='images/Logo.png') }}">
    <nav>
       <span><a href="">Về chúng tôi</a></span>
       <span><a href="">Liên hệ</a></span>
