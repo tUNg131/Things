@@ -1,4 +1,4 @@
-var deadline = new Date("dec 31, 2017 15:37:25").getTime(); 
+var deadline = new Date("sep 31, 2020 00:00:00").getTime(); 
   
 var x = setInterval(function() { 
   
@@ -14,9 +14,8 @@ document.getElementById("minute").innerHTML = minutes;
 document.getElementById("second").innerHTML =seconds;  
 if (t < 0) { 
         clearInterval(x); 
-        document.getElementById("demo").innerHTML = "TIME UP"; 
         document.getElementById("day").innerHTML ='0'; 
         document.getElementById("hour").innerHTML ='0'; 
         document.getElementById("minute").innerHTML ='0' ;  
         document.getElementById("second").innerHTML = '0'; } 
-}, 1000); 
+}); 
