@@ -51,27 +51,21 @@ nav span a:active {
     color: inherit;
 }
 
-/* styling chart */
-
-#chart-box {
-    padding-top: 60px;
-}
+/* styling next collection */
 
 #next-collection {
     position: relative;
     height: 200px;
-    width: 800px;
-    margin: 0px 346px 35px 142px;
-    padding-top: 124px;
+    width: 904px;
+    margin: 0px auto auto 142px;
+    padding-top: 122px;
 }
 
-#next-collection-chart {
+.next-collection-chart {
     height: 200px;
-    width: 800px;
+    width: 904px;
     border: solid 1px black;
 }
-
-/* styling next collection */
 
 #next-collection > h1{ 
     color: #6A6D75; 
@@ -104,17 +98,47 @@ nav span a:active {
       font-size: 16px; 
 } 
 
+/* styling chart */
+
+.homepage-chart-box {
+    width: 440px;
+    height: 234px;
+    border: solid #6A6D75;
+}
+
+#donut-box {
+    margin-right: 10px;
+}
+
+#line-box {
+    margin-left: 10px;
+}
+
+#chart-box {
+    width: 900px;
+    height: 239px;
+    margin-top: 28px;
+    margin-left: 139px;
+}
+
+.homepage-chart {
+    width: 200px;
+    height: 150px;
+}
+
 /* styling no data next collection */
 
-#next-collection-chart a {
+.next-collection-chart a {
     text-decoration: none;
 }
 
 #button-choose-date {
+    width: 277px;
+    height: 60px;
+    display: inline-flex;
     border: solid #6A6D75;
-    margin-bottom: 29.5%;
-    margin-top: auto;
     align-items: center;
+    justify-content: center;
 }
 
 #button-choose-date > p {
@@ -136,4 +160,22 @@ nav span a:active {
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+
+/* styling no data chart */ 
+
+.nodata-instruct-div {
+    border: solid #6A6D75;
+    float: right ;
+    overflow: hidden;
+    width: 157px;
+    height: 70px;
+    text-align: center;
+    justify-content: left;
+}
+
+#donut-chart {
+    display: inline-block;
+    border: solid springgreen 2px;
+    padding: 60px auto auto 40px;  
 }

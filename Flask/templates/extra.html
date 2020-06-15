@@ -54,6 +54,27 @@
       <div id="donutchart" style="width: 700px; height: 300px;"></div>
       <div id='chart_div' style='width: 700px; height: 300px;'></div>
   </section>
+    <!-- chart.js use for nodata -->
+    <section class="flex-container" id="chart-box">
+        <div class="homepage-chart-box" id="donut-box">
+            <div class="homepage-chart" id="donut-chart">
+        
+            </div>        
+            <div class="nodata-instruct-div" id="huong-dan-donut-chart">
+                <p class="nodata-instruct-p">Hướng dẫn:<br>Biểu đồ nguyên liệu bạn đã tái chế theo %</p>
+            </div>
+            <div class="nodata-instruct-div" id="call-to-action-donut">
+                <p class="nodata-instruct-p">Hãy bắt đầu thu gom nguyên liệu để có biểu đồ cho bạn</p>
+            </div>
+        </div>
+        <div class="homepage-chart-box" id="line-box">
+            
+            <div class="homepage-chart" id='line-chart'>
+            
+            </div>
+        </div>
+    </section>
+    <!-- end nodata uses for chart.js -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/pie_chart_for_homepage.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/annotations_chart_for_homepage.js') }}"></script>
