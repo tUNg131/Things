@@ -1,35 +1,81 @@
 {% extends 'collect/base.html' %}
 
 {% block head %}
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
 
-        var options = {
-          title: 'My Daily Activities',
-          pieHole: 0.6,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-    </script>
-{% block title %}HomePage{% endblock %}
-
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'collect/css/home.css' %}">
 {% endblock %}
 
+{% block title %}HomePage{% endblock %}
+
 {% block body %}
+    <header class="flex-container">
+        <nav>
+            <span><a href="">Về chúng tôi</a></span>
+            <span><a href="">Liên hệ</a></span>
+        </nav>
+    </header>
+    {% if transaction_history.next_collection_json %}
+      <section class="flex-container" id="next-collection">
+          <div id="next-collection-chart">
+              <h1>Next collection</h1>
+              <div id="clockdiv">
+                  <div>
+                      <span class="days" id="day"></span>
+                      <div class="smalltext">Days</div>
+                  </div>
+                  <div>
+                      <span class="hours" id="hour"></span>
+                      <div class="smalltext">Hours</div>
+                  </div>
+                  <div>
+                      <span class="minutes" id="minute"></span>
+                      <div class="smalltext">Minutes</div>
+                  </div>
+                  <div>
+                      <span class="seconds" id="second"></span>
+                      <div class="smalltext">Seconds</div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <script type="text/javascript">
+        var next_collection = {{ transaction_history.next_collection_json|safe }}
+      </script>
+      <script src="{% static 'collect/js/next_collection.js' %}"></script>
+    {% else %}
+      <section>
+          <div class="next-collection-chart">
+              <p class="nodata-instruct">Hãy đặt lịch hàng tuần để Things giúp bạn thu gom đồ tái chế</p>
+              <a href="">
+                  <div id="button-choose-date">
+                      <p>Chọn ngày giờ <i class="arrow right"></i></p>
+                  </div>
+              </a>
+          </div>
+      </section>
+    {% endif %}
+    
+    {% if transaction_history.by_type_json %}
+      <h1>Have a by_type chart</h1>
+      <script type="text/javascript">
+        var by_type_json = {{ transaction_history.by_type_json|safe }}
+      </script>
 
-    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+      <div id="piechart" style="width: 700px; height: 300px;"></div>
+      <!-- script for by_type chart here -->
+    {% else %}
+      <h1>Data for by_type chart are not available</h1>
+    {% endif %}
 
+    {% if transaction_history.by_month_json %}
+      <h1>Have a by_month chart</h1>
+      <script type="text/javascript">
+        var by_month_json = {{ transaction_history.by_month_json|safe }}
+      </script>
+    <!-- div for by_month chart here -->
+    <!-- script for by_month chart here -->
+    {% else %}
+      <h1>Data for by_month chart are not available</h1>
+    {% endif %}
 {% endblock %}

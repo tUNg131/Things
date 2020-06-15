@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
@@ -122,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# LOGIN_REDIRECT_URL = ''
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, "static"),
+
+]
+
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.User'

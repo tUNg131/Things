@@ -9,14 +9,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
-
 class UserManager(BaseUserManager):
     def _create_user(self, full_name, email, password, **extra_fields):
         """
@@ -49,55 +41,6 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(full_name, email, password, **extra_fields)
-
-class TransactionHistory(models.Manager):
-    all_grouping_methods = () # has to be a tuple
-    temp_table_name = ''
-
-    class Result:
-        def __init__(self, pk):
-            self.user_pk = pk
-
-    def _analyse(self, cursor, *methods):
-        result = Result(pk)
-        if methods is None:
-            methods = all_grouping_methods
-        for method in methods:
-            try:
-                attr = getattr(self, method)
-                if callable(attr):
-                    _result = attr(cursor)
-                    setattr(result, method, _result)
-                else:
-                    raise AttributeError
-            except AttributeError:
-                print(f"Doesn't have method {method}")
-                raise
-        return result
-
-    def analyse(self, pk, *methods):
-        from django.db import connection
-        with connection.cursor() as cursor:
-            cursor.execute("""
-                # Get the tempTable
-            """, self.temp_table_name)
-            result = self._analyse(cursor=cursor, *methods)
-        return result
-
-    def by_type(self, cursor):
-        cursor.execute("""
-        """)
-        return dictfetchall(cursor)
-
-    def by_month(self, cursor):
-        cursor.execute("""
-        """)
-        return dictfetchall(cursor)
-
-    def next_collection(self, cursor):
-        cursor.execute("""
-        """)
-        return dictfetchall(cursor)
 
 class User(AbstractBaseUser, PermissionsMixin):
     full_name       = models.CharField(
@@ -146,7 +89,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = UserManager()
-    transaction_history = TransactionHistory()
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
@@ -172,6 +114,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+    def pre_transactions(self):
+        from collect.models import Transaction_ObjectType
+        qs = Transaction_ObjectType.objects.filter(transaction__user_id=self.id, transaction__is_active=False)      \
+            .select_related('object_type')                                                                          \
+            .defer(
+            'transaction_id',
+            'objecttype__price_max',
+            'objecttype__price_min',
+            )
+        return qs
 
 class Location(models.Model):
     city            = models.CharField(

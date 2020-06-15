@@ -6,13 +6,11 @@
 
 <form action="{% url 'login' %}" method="post">
   {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
   {{ form.username }}
   {{ form.password }}
   {{ form.remember.label_tag }}
   {{ form.remember }}
-  <!-- {{ form.}} -->
-
-  <!-- {{ form.as_p }} -->
   <button type="submit">Submit</button>
 </form>
 

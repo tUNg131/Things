@@ -22,7 +22,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'full_name', 'phone', 'location', 'detail_address', 'is_staff')
+    list_display = ('email', 'full_name', 'phone', 'location', 'detail_address', 'is_staff', 'is_active')
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
