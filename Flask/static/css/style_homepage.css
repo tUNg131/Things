@@ -103,3 +103,37 @@ nav span a:active {
       padding-top: 5px; 
       font-size: 16px; 
 } 
+
+/* styling no data next collection */
+
+#next-collection-chart a {
+    text-decoration: none;
+}
+
+#button-choose-date {
+    border: solid #6A6D75;
+    margin-bottom: 29.5%;
+    margin-top: auto;
+    align-items: center;
+}
+
+#button-choose-date > p {
+    text-decoration: none;
+    color: #6A6D75;
+}
+
+#button-choose-date > p:active {
+    color: inherit;
+}
+
+.arrow {
+  border: solid #6A6D75;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_homepage.css') }}" type="text/css">
+{% endblock %}
+
+{% block title %}Home page{% endblock %}
+
+{% block body %}
+{{ super() }}
+  <input type="hidden" id="next_collection" name="next_collection" value="">
+  <header class="flex-container">
+    <img id="logo" src="{{ url_for('static', filename='images/Logo.png') }}">
+   <nav>
+      <span><a href="">Về chúng tôi</a></span>
+      <span><a href="">Liên hệ</a></span>
+    </nav>
+  </header>
+  <section class="flex-container" id="next-collection">
+        <div id="next-collection-chart">
+            <h1>Next collection</h1> 
+            <div id="clockdiv"> 
+                <div> 
+                    <span class="days" id="day"></span> 
+                    <div class="smalltext">Days</div> 
+                </div> 
+                <div> 
+                    <span class="hours" id="hour"></span> 
+                    <div class="smalltext">Hours</div> 
+                </div> 
+                <div> 
+                    <span class="minutes" id="minute"></span> 
+                    <div class="smalltext">Minutes</div> 
+                </div> 
+                <div> 
+                    <span class="seconds" id="second"></span> 
+                    <div class="smalltext">Seconds</div> 
+                </div> 
+            </div> 
+        </div>
+        
+        <!-- for nodata uses -->        
+        <div class="next-collection-chart">
+            <p class="nodata-instruct">Hãy đặt lịch hàng tuần để Things giúp bạn thu gom đồ tái chế</p>
+            <a href="">
+                <div id="button-choose-date">
+                    <p>Chọn ngày giờ <i class="arrow right"></i></p>
+                </div> 
+        </div>   
+        <!-- end nodata uses for next collection chart -->
+  </section>
+  <section class="flex-container" id="chart-box">
+      <div id="donutchart" style="width: 700px; height: 300px;"></div>
+      <div id='chart_div' style='width: 700px; height: 300px;'></div>
+  </section>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/pie_chart_for_homepage.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/annotations_chart_for_homepage.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/next-collection-countdown.js') }}"></script>
+{% endblock %}

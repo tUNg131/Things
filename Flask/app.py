@@ -58,6 +58,11 @@ def unauthorized():
 def landing():
     return render_template('landing_page.html')
 
+# route này là temporary, để check extra.html
+@app.route('/homepage-2')
+def extra():
+    return render_template('extra.html')
+
 @app.route('/homepage')
 # @login_required
 def index():
