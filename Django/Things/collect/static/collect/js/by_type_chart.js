@@ -12,7 +12,6 @@ function by_typeToChartArray(arr) {
   return result_array
 };
 
-
 function xamlon(arr) {
   var labels = []
   var data = []
@@ -25,20 +24,42 @@ function xamlon(arr) {
     "data": data
   }
   return result
-}
 
+// google.charts.load("current", {packages:["corechart"]});
+//       google.charts.setOnLoadCallback(drawChart);
+//       function drawChart() {
+//         var data = google.visualization.arrayToDataTable(
+//           by_typeToChartArray(by_type.data)
+//         );
+//         var options = {
+//           title: 'My Daily Activities',
+//           pieHole: 0.4,
+//         };
 
-google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(
-          by_typeToChartArray(by_type.data)
-        );
-        var options = {
-          title: 'My Daily Activities',
-          pieHole: 0.4,
-        };
+//         var chart = new google.visualization.PieChart(document.getElementById('by_type_chart'));
+//         chart.draw(data, options);
+//       }; 
 
-        var chart = new google.visualization.PieChart(document.getElementById('by_type_chart'));
-        chart.draw(data, options);
-      };
+const ctx = document.getElementById('by_type_chart');
+const data_and_labels = xamlon(by_type.data)
+const myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: data_and_labels.labels,
+        datasets: [{
+            label: '# of votes',
+            data: data_and_labels.data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                ],
+            }
+        ],
+        options: {
+            maintainAspectRatio: false,
+            responsive: true
+        }
+    }
+});
+      
