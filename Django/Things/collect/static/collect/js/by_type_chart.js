@@ -24,6 +24,7 @@ function xamlon(arr) {
     "data": data
   }
   return result
+}
 
 // google.charts.load("current", {packages:["corechart"]});
 //       google.charts.setOnLoadCallback(drawChart);
@@ -62,4 +63,3 @@ const myPieChart = new Chart(ctx, {
         }
     }
 });
-      
