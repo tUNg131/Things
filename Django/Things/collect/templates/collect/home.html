@@ -78,4 +78,7 @@
     {% else %}
       <h1>Data for by_month chart are not available</h1>
     {% endif %}
+    <script type="text/javascript">
+      var public_record_by_type = {{ public_record.by_type|safe }}
+    </script>
 {% endblock %}

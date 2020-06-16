@@ -118,12 +118,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def pre_transactions(self):
         from collect.models import Transaction_ObjectType
-        qs = Transaction_ObjectType.objects.filter(transaction__user_id=self.id, transaction__is_active=False)      \
-            .select_related('object_type')                                                                          \
+        qs = Transaction_ObjectType.objects.filter(transaction__user_id=self.id, transaction__is_active=False)\
+            .select_related('object_type')\
             .defer(
-            'transaction_id',
-            'objecttype__price_max',
-            'objecttype__price_min',
+                'transaction_id',
+                'objecttype__price_max',
+                'objecttype__price_min',
             )
         return qs
 

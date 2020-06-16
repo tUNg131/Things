@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import F, Q, Sum
+from django.db.models import F, Sum
 from django.db.models.functions import (
     ExtractYear, ExtractMonth
 )
@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 from accounts.models import User
-from collect.models import Transaction, Transaction_ObjectType
+from collect.models import Transaction, Transaction_ObjectType, PublicRecord
 
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'collect/home.html'
@@ -28,6 +28,7 @@ class Index(LoginRequiredMixin, TemplateView):
             'next_collection_json':  self._get_json_next_collection()
         }
         context['transaction_history'] = transaction_history
+        context['public_record'] = self._get_json_public_record()
         return context
 
     def _get_json_next_collection(self):
@@ -72,3 +73,14 @@ class Index(LoginRequiredMixin, TemplateView):
         except Transaction_ObjectType.DoesNotExist:
             json = None
         return json
+
+    def _get_json_public_record(self):
+        try:
+            latest = PublicRecord.objects.latest('date_added')
+            result_dict = {
+                'by_type': latest.by_type,
+                'by_month': latest.by_month
+            }
+        except PublicRecord.DoesNotExist:
+            result_dict = None
+        return result_dict
