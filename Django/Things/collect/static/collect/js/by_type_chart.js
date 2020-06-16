@@ -1,9 +1,9 @@
-function _objectToArray(object) {
-  var result = [object.type_name, parseInt(object.total_quantity)]
-  return result
-};
-
 function by_typeToChartArray(arr) {
+  function _objectToArray(object) {
+    var result = [object.type_name, parseInt(object.total_quantity)]
+    return result
+  };
+
   var result_array = [["Type Name", "Total Quantity"],]
   for (let i = 0; i < arr.length; i++) {
     result = _objectToArray(arr[i])
