@@ -25,6 +25,10 @@ function xamlon(arr) {
   }
   return result
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 650d4e00d4659623cb87d32f78d94ee7cce91d01
 // google.charts.load("current", {packages:["corechart"]});
 //       google.charts.setOnLoadCallback(drawChart);
 //       function drawChart() {

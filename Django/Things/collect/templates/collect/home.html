@@ -49,7 +49,7 @@
               <p class="nodata-instruct">Hãy đặt lịch hàng tuần để Things giúp bạn thu gom đồ tái chế</p>
               <a href="">
                   <div id="button-choose-date">
-                      <p>Chọn ngày giờ <i class="arrow right"></i></p>
+                    <p>Chọn ngày giờ <i class="arrow right"></i></p>
                   </div>
               </a>
           </div>
@@ -62,7 +62,7 @@
         var by_type = {{ transaction_history.by_type_json|safe }}
       </script>
       <div id="by_type_chart" style="width: 700px; height: 300px;"></div>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
       <script src="{% static 'collect/js/by_type_chart.js' %}"></script>
     {% else %}
       <h1>Data for by_type chart are not available</h1>
