@@ -55,15 +55,15 @@
           </div>
       </section>
     {% endif %}
-    
+
     {% if transaction_history.by_type_json %}
       <h1>Have a by_type chart</h1>
       <script type="text/javascript">
-        var by_type_json = {{ transaction_history.by_type_json|safe }}
+        var by_type = {{ transaction_history.by_type_json|safe }}
       </script>
-
-      <div id="piechart" style="width: 700px; height: 300px;"></div>
-      <!-- script for by_type chart here -->
+      <div id="by_type_chart" style="width: 700px; height: 300px;"></div>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script src="{% static 'collect/js/by_type_chart.js' %}"></script>
     {% else %}
       <h1>Data for by_type chart are not available</h1>
     {% endif %}
@@ -71,7 +71,7 @@
     {% if transaction_history.by_month_json %}
       <h1>Have a by_month chart</h1>
       <script type="text/javascript">
-        var by_month_json = {{ transaction_history.by_month_json|safe }}
+        var by_month = {{ transaction_history.by_month_json|safe }}
       </script>
     <!-- div for by_month chart here -->
     <!-- script for by_month chart here -->

@@ -23,14 +23,14 @@ class Index(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
 
         transaction_history = {
-            'by_type_json':          self.get_json_by_type(),
-            'by_month_json':         self.get_json_by_month(),
-            'next_collection_json':  self.get_json_next_collection()
+            'by_type_json':          self._get_json_by_type(),
+            'by_month_json':         self._get_json_by_month(),
+            'next_collection_json':  self._get_json_next_collection()
         }
         context['transaction_history'] = transaction_history
         return context
 
-    def get_json_next_collection(self):
+    def _get_json_next_collection(self):
         try:
             timestamp_next_collection = User.objects\
                 .get(pk=self.request.user.id)\
@@ -43,7 +43,7 @@ class Index(LoginRequiredMixin, TemplateView):
             json = None
         return json
 
-    def get_json_by_type(self):
+    def _get_json_by_type(self):
         try:
             by_type = self.request.user.pre_transactions()\
                 .values(type_name=F('objecttype__type_name'))\
@@ -58,25 +58,17 @@ class Index(LoginRequiredMixin, TemplateView):
             json = None
         return json
 
-    def get_json_by_month(self):
+    def _get_json_by_month(self):
         try:
             by_month = self.request.user.pre_transactions()\
                 .annotate(month=ExtractMonth('transaction__collecting_date'), year=ExtractYear('transaction__collecting_date'))\
                 .values('month', 'year').order_by('year', 'month')\
                 .annotate(total_quantity=Sum('quantity'))
             json = _json.dumps(
-                {'by_type': list(by_month)},
+                {'data': list(by_month)},
                 cls=DjangoJSONEncoder,
                 ensure_ascii=False
             )
-            # latest_record = by_month[0]
-            # for i in range(by_month):
-            #     record = by_month[i]
-            #     delta = 12*(latest_record['year'] - record['year']) + (latest_record['month'] - record['month'])
-            #     if delta > 12:
-            #         by_month = by_month[:i-1]
-            #         break
-
         except Transaction_ObjectType.DoesNotExist:
             json = None
         return json

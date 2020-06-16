@@ -22,4 +22,4 @@ if (t < 0) {
         document.getElementById("hour").innerHTML = '0';
         document.getElementById("minute").innerHTML = '0' ;
         document.getElementById("second").innerHTML = '0';}
-}, 1000);
+});
