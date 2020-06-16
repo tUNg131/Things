@@ -24,7 +24,7 @@ function xamlon(arr) {
     "data": data
   }
   return result
-
+}
 // google.charts.load("current", {packages:["corechart"]});
 //       google.charts.setOnLoadCallback(drawChart);
 //       function drawChart() {
@@ -38,7 +38,7 @@ function xamlon(arr) {
 
 //         var chart = new google.visualization.PieChart(document.getElementById('by_type_chart'));
 //         chart.draw(data, options);
-//       }; 
+//       };
 
 const ctx = document.getElementById('by_type_chart');
 const data_and_labels = xamlon(by_type.data)
@@ -62,4 +62,3 @@ const myPieChart = new Chart(ctx, {
         }
     }
 });
-      

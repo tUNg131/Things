@@ -72,3 +72,4 @@ class Transaction_ObjectType(models.Model):
 
     def __str__(self):
         return f"({self.transaction.user}) submitted: {self.transaction.submitted_date} - {self.objecttype.type_name}: {self.quantity} {self.objecttype.unit}"
+    
