@@ -12,6 +12,22 @@ function by_typeToChartArray(arr) {
   return result_array
 };
 
+
+function xamlon(arr) {
+  var labels = []
+  var data = []
+  for (let i=0; i<arr.length; i++) {
+    labels.push(arr.type_name)
+    data.push(arr.total_quantity)
+  }
+  var result = {
+    "labels": labels,
+    "data": data
+  }
+  return result
+}
+
+
 google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
