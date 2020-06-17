@@ -90,3 +90,44 @@ nav span a:active {
     height: auto;
     padding-top: 60px;
 }
+
+/* Styling cho phần instruct */
+
+#instruct-box {
+    width: 1085px;
+    height: 482px;
+    margin: 81px 139px 174px 141px;
+    border: solid #6A6D75 1px;
+    flex-wrap: wrap;
+}
+
+.instruct-row {
+    display: flex;
+}
+
+#instruct-signup {
+    border-bottom: solid #6A6D75 1px;
+    margin-bottom: 17px;
+}
+
+#instruct-follow-data {
+    border-top: solid #6A6D75 1px;
+    margin-top: 17px;
+}
+
+#instruct-cf-address {
+    border-top: solid #6A6D75 1px;
+    border-bottom: solid #6A6D75 1px;
+}
+
+.illustrate {
+    width: 259px;
+    height: 100%;
+}
+
+.instruct-para {
+    width: 800px;
+    height: 100%;
+    padding: 13px;
+}
+
