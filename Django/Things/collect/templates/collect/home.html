@@ -81,4 +81,6 @@
     <script type="text/javascript">
       var public_record_by_type = {{ public_record.by_type|safe }}
     </script>
+
+    <a href="{% url 'accounts:logout' %}">Log out here!</a>
 {% endblock %}

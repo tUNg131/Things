@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html'%}
+
+{% block title %}Register{% endblock %}
+
+{% block detail_form %}
+  <form class="form-detail" action="{% url 'accounts:register' %}" method="post" id="register-form" data-switcherId="login-switcher">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <h2>REGISTER FORM</h2>
+    <div class="form-row">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+    </div>
+    <div class="form-row">
+      {{ form.full_name.label_tag}}
+      {{ form.full_name }}
+    </div>
+    <div class="form-row">
+      {{ form.password1.label_tag}}
+      {{ form.password1 }}
+    </div>
+    <div class="form-row">
+      {{ form.password2.label_tag}}
+      {{ form.password2 }}
+    </div>
+    <div class="form-checkbox">
+      <label class="container"><p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
+          <input type="checkbox" name="checkbox">
+          <span class="checkmark"></span>
+      </label>
+    </div>
+    <div class="form-row-last">
+      <input type="submit" name="register" class="register" value="Register">
+    </div>
+  </form>
+{% endblock %}
+
+{% block form_left_last %}
+  <form action="{% url 'accounts:login' %}" method="get">
+    <input type="submit" name="account" class="account form-detail-switcher" id="login-switcher" value="Have An Account">
+  </form>
+{% endblock %}
+
+{% block body %}
+{{ block.super }}
+{% endblock %}

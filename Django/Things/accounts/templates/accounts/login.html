@@ -2,16 +2,33 @@
 
 {% block title %}Login{% endblock %}
 
+{% block detail_form %}
+  <form class="form-detail" action="{% url 'accounts:login' %}" method="post" id="login-form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <h2>LOGIN</h2>
+    <div class="form-row">
+      <label for="your_email">Your Email</label>
+      {{ form.username }}
+    </div>
+    <div class="form-row">
+      <div class="form-row" id="form-row-password">
+        <label for="password">Password</label>
+        {{ form.password }}
+      </div>
+    </div>
+    <div class="form-row-last">
+      <input type="submit" name="register" class="register" value="Login">
+    </div>
+  </form>
+{% endblock %}
+
+{% block form_left_last %}
+  <form action="{% url 'accounts:register' %}" method="get">
+    <input type="submit" name="account" class="account form-detail-switcher" id="register-switcher" value="Don't Have An Account">
+  </form>
+{% endblock %}
+
 {% block body %}
-
-<form action="{% url 'login' %}" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="next" value="{{ next }}">
-  {{ form.username }}
-  {{ form.password }}
-  {{ form.remember.label_tag }}
-  {{ form.remember }}
-  <button type="submit">Submit</button>
-</form>
-
+{{ block.super }}
 {% endblock %}

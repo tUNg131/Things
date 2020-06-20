@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    {% load static %}
     <meta charset="utf-8">
+
     <title>{% block title %}{% endblock %}</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Jquery -->
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/style.css' %}"/>
   </head>
   <body>
-    {% block body %}{% endblock %}
+    {% block body %}
+    <div class="page-content">
+      <div class="form-v4-content">
+        <div class="form-left">
+          <h2>INFORMATION</h2>
+          <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+          <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
+          <div class="form-left-last">
+            {% block form_left_last %}
+            {% endblock %}
+          </div>
+        </div>
+    {% block detail_form %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    {% endblock %}
   </body>
 </html>

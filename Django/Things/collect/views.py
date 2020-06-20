@@ -3,6 +3,7 @@ import json as _json
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,9 +13,11 @@ from django.db.models.functions import (
 )
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse_lazy
 
 from accounts.models import User
 from collect.models import Transaction, Transaction_ObjectType, PublicRecord
+from .forms import TransactionCreationForm
 
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'collect/home.html'
@@ -84,3 +87,8 @@ class Index(LoginRequiredMixin, TemplateView):
         except PublicRecord.DoesNotExist:
             result_dict = None
         return result_dict
+
+class TransactionCreationView(LoginRequiredMixin, FormView):
+    template_name = 'collect/transaction_creation.html'
+    form_class = TransactionCreationForm
+    success_url = reverse_lazy('collect:home')
