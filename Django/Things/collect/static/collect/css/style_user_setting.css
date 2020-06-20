@@ -2,6 +2,7 @@
 
 html {
     font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
 }
 
 body {
@@ -68,7 +69,7 @@ nav span a:active {
 }
 
 #setting-nav-bar {
-    height: 71px;
+    height: 72px;
     display: flex;
     flex-direction: row;
 }
@@ -78,30 +79,65 @@ nav span a:active {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: solid #6A6D75 1px;
+    /* border-bottom: solid #6A6D75 1px; */
+    cursor: pointer;
 }
-
+/* 
 #person-switcher {
-    border-right: solid #6A6D75 1px;
-}
+    border-right: solid #6A6D75 1px; 
+    border-bottom: solid #6A6D75 1px;
+} */
+
+/* #acc-switcher {
+    border-bottom: solid #6A6D75 1px;
+} */
 
 .inner-setting-box {
     width: 904px;
     height: 506px;
-    flex-direction: column;;
+    flex-direction: column;
+    display: flex;
 }
 
 .setting-row {
     width: 822px;
-    height: 78px;
+    height: 65px;
     display: flex;
     margin: 15px auto 15px 40px;
     border: solid #6A6D75 1px;
     align-items: center;
 }
 
+.first-setting-row {
+    margin-top: 40px;
+}
+
 .setting-row > p {
-    margin: 31px auto auto 43px;
+    margin: auto auto auto 43px;
     display: inline;
 }
 
+.change-info-button {
+    display: flex;
+    width: 306px;
+    height: 75px;
+    margin: auto 40px 15px auto;
+    justify-content: flex-end;
+    border: solid #6A6D75 1px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.change-info-button > p {
+    display: inline;
+}
+
+.clicked {
+    background-color: #a1a6b3;
+    border-bottom: none;
+}
+
+.hidden-class {
+    display: none;
+}
