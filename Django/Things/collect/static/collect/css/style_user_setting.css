@@ -1,0 +1,143 @@
+/* universal styling */
+
+html {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    margin: 0px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+/* styling header */
+
+header {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    height: 60px;
+    border-bottom: 1px solid #6A6D75;
+    background-color: white;
+}
+
+#logo {
+    width: 50px;
+    height: 50px;
+    padding: 5px 10px;
+    margin-left: 45px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav span {
+    display: inline-block;
+    padding-left: 30px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+nav span a {
+    color: #6A6D75;
+    text-decoration: none;
+}
+
+nav span a:active {
+    color: inherit;
+}
+
+/* Styling user settings */
+
+#user-setting-frame {
+    width: 904px;
+    height: 577px;
+    margin: 0px auto auto 139px;
+    padding-top: 113px;
+}
+
+.setting-box {
+    width: 904px;
+    height: 577px;
+    border: solid #6A6D75 1px;
+    flex-direction: column;
+}
+
+#setting-nav-bar {
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+}
+
+.setting-switcher {
+    width: 452px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-bottom: solid #6A6D75 1px; */
+    cursor: pointer;
+}
+/* 
+#person-switcher {
+    border-right: solid #6A6D75 1px; 
+    border-bottom: solid #6A6D75 1px;
+} */
+
+/* #acc-switcher {
+    border-bottom: solid #6A6D75 1px;
+} */
+
+.inner-setting-box {
+    width: 904px;
+    height: 506px;
+    flex-direction: column;
+    display: flex;
+}
+
+.setting-row {
+    width: 822px;
+    height: 65px;
+    display: flex;
+    margin: 15px auto 15px 40px;
+    border: solid #6A6D75 1px;
+    align-items: center;
+}
+
+.first-setting-row {
+    margin-top: 40px;
+}
+
+.setting-row > p {
+    margin: auto auto auto 43px;
+    display: inline;
+}
+
+.change-info-button {
+    display: flex;
+    width: 306px;
+    height: 75px;
+    margin: auto 40px 15px auto;
+    justify-content: flex-end;
+    border: solid #6A6D75 1px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.change-info-button > p {
+    display: inline;
+}
+
+.clicked {
+    background-color: #a1a6b3;
+    border-bottom: none;
+}
+
+.hidden-class {
+    display: none;
+}
