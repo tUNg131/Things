@@ -12,6 +12,10 @@ $('#person-switcher').on('click', () => {
         border: 'none',
     });
     $('#person-setting-box').show();
+
+    // Hide forms
+    $('#person-setting-form').hide();
+    $('#acc-setting-form').hide();
 })
 
 $('#acc-switcher').on('click', () => {
@@ -27,6 +31,23 @@ $('#acc-switcher').on('click', () => {
         border: 'none',
     });
     $('#acc-setting-box').show();
+
+    // Hide form 
+    $('#person-setting-form').hide();
+    $('#acc-setting-form').hide();
+});
+
+// Show form when event fire
+$('#change-person-info-button').on('click', () => {
+    //show change person info form 
+    $('#person-setting-form').show();
+    $('#person-setting-box').hide();
+})
+
+$('#change-acc-info-button').on('click', () => {
+    //show change acc info form 
+    $('#acc-setting-form').show();
+    $('#acc-setting-box').hide();
 })
 
 $('#person-switcher').click()

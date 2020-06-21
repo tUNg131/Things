@@ -145,3 +145,37 @@ nav span a:active {
 .hidden-class {
     display: none;
 }
+
+/*Styling cho thay đổi thông tin trong user setting*/
+
+#both-save-discard-box {
+    width: 546px;
+    height: 61px;
+    margin: auto 38px 28px auto;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#save-change-button {
+    width: 244px;
+    height: 61px;
+    margin-right: 58px;
+    border: solid #6A6D75 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#discard-change-button {
+    width: 244px;
+    height: 61px;
+    display: flex;
+    border: solid #6A6D75 1px;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting-row > label {
+    margin: auto 15px auto 43px;
+    display: inline;
+}
