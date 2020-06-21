@@ -3,7 +3,7 @@ $('#person-switcher').on('click', () => {
     $('#acc-setting-box').hide();
     $('#acc-switcher').css({
         backgroundColor: '#a1a6b3',
-        borderLeft: 'solid #6A6D75 1px',
+        // borderLeft: 'solid #6A6D75 1px',
     });
 
     // Show person
@@ -19,7 +19,7 @@ $('#acc-switcher').on('click', () => {
     $('#person-setting-box').hide();
     $('#person-switcher').css({
         backgroundColor: '#a1a6b3',
-        borderRight: 'solid #6A6D75 1px',
+        // borderRight: 'solid #6A6D75 1px',
     });
     // Show acc
     $('#acc-switcher').css({

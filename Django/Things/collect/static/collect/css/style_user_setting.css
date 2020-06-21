@@ -62,20 +62,24 @@ nav span a:active {
 }
 
 .setting-box {
-    width: 904px;
+    width: 900px;
     height: 577px;
-    border: solid #6A6D75 1px;
+    display: flex;
+    border: solid #6A6D75 2px;
     flex-direction: column;
+    padding-left: 0.5px;
+    padding-right: 0.5px;
 }
 
 #setting-nav-bar {
-    height: 72px;
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .setting-switcher {
-    width: 452px;
+    height: 72px;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
