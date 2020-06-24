@@ -1,0 +1,42 @@
+{% load static %}
+
+{% if next_collection_json %}
+  <section class="flex-container" id="next-collection">
+      <div id="next-collection-chart">
+          <h1>Next collection</h1>
+          <div id="clockdiv">
+              <div>
+                  <span class="days" id="day"></span>
+                  <div class="smalltext">Days</div>
+              </div>
+              <div>
+                  <span class="hours" id="hour"></span>
+                  <div class="smalltext">Hours</div>
+              </div>
+              <div>
+                  <span class="minutes" id="minute"></span>
+                  <div class="smalltext">Minutes</div>
+              </div>
+              <div>
+                  <span class="seconds" id="second"></span>
+                  <div class="smalltext">Seconds</div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <script type="text/javascript">
+    var next_collection = {{ next_collection_json|safe }}
+  </script>
+  <script src="{% static 'collect/js/next_collection.js' %}"></script>
+{% else %}
+  <section>
+      <div class="next-collection-chart">
+          <p class="nodata-instruct">Hãy đặt lịch hàng tuần để Things giúp bạn thu gom đồ tái chế</p>
+          <a href="{% url 'collect:trasaction_booking' %}">
+              <div id="button-choose-date">
+                <p>Chọn ngày giờ <i class="arrow right"></i></p>
+              </div>
+          </a>
+      </div>
+  </section>
+{% endif %}

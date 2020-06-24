@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserChangeForm
 from django.views.generic import UpdateView, CreateView
+from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 
 from .models import User
@@ -19,8 +20,7 @@ class RegisterUser(CreateView):
 class Settings(UpdateView):
     template_name = 'accounts/settings.html'
     model = User
-    fields = ['full_name', 'email', 'location', 'detail_address', 'phone']
+    fields = ['full_name', 'email', 'phone', 'address', 'detail_address']
 
 class LogoutUser(LogoutView):
-    next_page = reverse_lazy('accounts:login')
-    template_name = 'accounts/logout.html'
+    next_page = reverse_lazy('collect:landing_page')

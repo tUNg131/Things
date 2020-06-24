@@ -1,94 +1,92 @@
 from datetime import timedelta
-import json as _json
+import json
 
-from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic import UpdateView
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import F, Sum
-from django.db.models.functions import (
-    ExtractYear, ExtractMonth
-)
+
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 
-from accounts.models import User
 from collect.models import Transaction, Transaction_ObjectType, PublicRecord
-from .forms import TransactionCreationForm
+from .forms import TransactionEditForm
 
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'collect/home.html'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        transaction_history = {
-            'by_type_json':          self._get_json_by_type(),
-            'by_month_json':         self._get_json_by_month(),
-            'next_collection_json':  self._get_json_next_collection()
+        context = {
+            'user_full_name': self.request.user.full_name,
+            'user_next_collection': self.user_next_collection,
+            'user_data': self.user_data,
+            'public_data': self.public_data,
         }
-        context['transaction_history'] = transaction_history
-        context['public_record'] = self._get_json_public_record()
-        return context
+        context.update(kwargs)
+        return super().get_context_data(**context)
 
-    def _get_json_next_collection(self):
+    @property
+    def user_data(self):
         try:
-            timestamp_next_collection = User.objects\
-                .get(pk=self.request.user.id)\
-                .transactions.get(is_active=True)\
-                .collecting_date.timestamp() * 1000 # for miliseconds # maybe better if we get the latest one and validate it in template
-            json = _json.dumps(
-                {'data': timestamp_next_collection}
-            )
-        except Transaction.DoesNotExist:
-            json = None
-        return json
+            by_month = list(self.request.user.completed_transactions.group_by_month())
+            by_type = list(self.request.user.completed_transactions.group_by_type())
 
-    def _get_json_by_type(self):
+            data = {
+            'by_month': json.dumps(by_month),
+            'by_type': json.dumps(by_type),
+            }
+        except self.request.user.NoTransactionAvailable:
+            data = None
+        return data
+
+    @property
+    def user_next_collection(self):
         try:
-            by_type = self.request.user.pre_transactions()\
-                .values(type_name=F('objecttype__type_name'))\
-                .annotate(total_quantity=Sum('quantity'))\
-                .order_by('-total_quantity')
-            json = _json.dumps(
-                {'data': list(by_type)},
-                cls=DjangoJSONEncoder,
-                ensure_ascii=False
-            )
-        except Transaction_ObjectType.DoesNotExist:
-            json = None
-        return json
+            timestamp_next_collection = json.dumps(self.request.user.next_collection.timestamp() * 1000) # for miliseconds
+            # maybe better if we get the latest one and validate it in template
+        except self.request.user.NoNextCollection:
+            timestamp_next_collection = None
+        return timestamp_next_collection
 
-    def _get_json_by_month(self):
-        try:
-            by_month = self.request.user.pre_transactions()\
-                .annotate(month=ExtractMonth('transaction__collecting_date'), year=ExtractYear('transaction__collecting_date'))\
-                .values('month', 'year').order_by('year', 'month')\
-                .annotate(total_quantity=Sum('quantity'))
-            json = _json.dumps(
-                {'data': list(by_month)},
-                cls=DjangoJSONEncoder,
-                ensure_ascii=False
-            )
-        except Transaction_ObjectType.DoesNotExist:
-            json = None
-        return json
-
-    def _get_json_public_record(self):
+    @property
+    def public_data(self):
         try:
             latest = PublicRecord.objects.latest('date_added')
-            result_dict = {
+            data = {
                 'by_type': latest.by_type,
                 'by_month': latest.by_month
             }
         except PublicRecord.DoesNotExist:
-            result_dict = None
-        return result_dict
+            data = None
+        return data
 
-class TransactionCreationView(LoginRequiredMixin, FormView):
-    template_name = 'collect/transaction_creation.html'
-    form_class = TransactionCreationForm
-    success_url = reverse_lazy('collect:home')
+class TransactionEditView(LoginRequiredMixin, UpdateView):
+    template_name = 'collect/booking.html'
+    form_class = TransactionEditForm
+    success_url = reverse_lazy('collect:index')
+    is_update_view = True
+
+    def get_object(self):
+        requesting_user = self.request.user
+        try:
+            transaction = Transaction.objects.filter(user_id=requesting_user.id, is_active=True).get()
+        except Transaction.DoesNotExist:
+            self.is_update_view = False
+            transaction = Transaction(user=requesting_user, address=requesting_user.address, detail_address=requesting_user.detail_address)
+            if transaction is None:
+                print("Is None!")
+            else:
+                print("Not None")
+        return transaction
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'is_update_view': self.is_update_view
+        }
+        context.update(kwargs)
+        return super().get_context_data(**context)
+
+class LandingPage(TemplateView):
+    template_name = 'collect/landing_page.html'

@@ -1,0 +1,9 @@
+{% load static %}
+
+<h1>Have a by_type chart</h1>
+<script type="text/javascript">
+  var by_type = {{ transaction_history.by_type_json|safe }}
+</script>
+<div id="by_type_chart" style="width: 700px; height: 300px;"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="{% static 'collect/js/by_type_chart.js' %}"></script>

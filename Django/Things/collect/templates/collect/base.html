@@ -1,12 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'collect/css/base.css' %}">
     {% block head %}
     {% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    <header class="flex-container">
+        <img src="" alt="">
+        <nav>
+            <span><a href="">Về chúng tôi</a></span>
+            <span><a href="">Liên hệ</a></span>
+            {% block nav %}{% endblock %}
+        </nav>
+        {% block header %}{% endblock %}
+    </header>
+    {% block content %}{% endblock %}
   </body>
 </html>

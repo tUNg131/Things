@@ -56,20 +56,11 @@ class User(AbstractBaseUser, PermissionsMixin):
          help_text=_('Required. 64 characters or fewer.')
     )
 
-    location        = models.ForeignKey('Location', on_delete=models.CASCADE, null=True, blank=True) # related_name
-
-    detail_address  = models.CharField(
-        _('Detail address'),
-        max_length=256,
-        help_text=_('Required for collections. 256 characters or fewer.'),
-        blank=True
-    )
-
     phone           = models.CharField(
         _('Phone number'),
         max_length=16,
         blank=True
-    )
+    ) #validator missing
 
     is_staff        = models.BooleanField(
         _('staff status'),
@@ -86,7 +77,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
 
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    address        = models.ForeignKey('accounts.Location', on_delete=models.CASCADE, null=True, blank=True) # related_name
+
+    detail_address  = models.CharField(
+        _('Detail address'),
+        max_length=256,
+        help_text=_('Required for collections. 256 characters or fewer.'),
+        blank=True
+        )
+
+    date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
 
     objects = UserManager()
 
@@ -97,6 +97,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+
+    class NoTransactionAvailable(Exception):
+        pass
+
+    class NoNextCollection(Exception):
+        pass
 
     def clean(self):
         super().clean()
@@ -115,17 +121,22 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
-
-    def pre_transactions(self):
+    @property
+    def completed_transactions(self):
         from collect.models import Transaction_ObjectType
-        qs = Transaction_ObjectType.objects.filter(transaction__user_id=self.id, transaction__is_active=False)\
-            .select_related('object_type')\
-            .defer(
-                'transaction_id',
-                'objecttype__price_max',
-                'objecttype__price_min',
-            )
+        qs = Transaction_ObjectType.objects.filter(transaction__user_id=self.id, transaction__is_active=False)
+        if not qs.exists():
+            raise type(self).NoTransactionAvailable
         return qs
+
+    @property
+    def next_collection(self):
+        from collect.models import Transaction
+        try:
+            collecting_date = self.transactions.get(is_active=True).collecting_date
+        except Transaction.DoesNotExist:
+            raise type(self).NoNextCollection
+        return collecting_date
 
 class Location(models.Model):
     city            = models.CharField(

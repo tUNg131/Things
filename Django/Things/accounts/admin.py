@@ -6,11 +6,11 @@ from collect.models import Transaction
 from django.utils.translation import gettext, gettext_lazy as _
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ('email', 'full_name', 'phone', 'location', 'detail_address', 'is_staff', 'is_active')
+    list_display = ('email', 'full_name', 'phone', 'is_staff', 'is_active')
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('full_name', 'phone', 'location', 'detail_address')}),
+        (_('Personal info'), {'fields': ('full_name', 'phone')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),

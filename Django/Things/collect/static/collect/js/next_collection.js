@@ -1,5 +1,5 @@
 var deadline = new Date(
-  next_collection.data
+  next_collection
 );
 
 var x = setInterval(function() {
