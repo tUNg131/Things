@@ -16,14 +16,30 @@
         <span><a href="">Về chúng tôi</a></span>
         <span><a href="">Liên hệ</a></span>
       </nav>
+      <div class="flex-container" id="user-icon">
+        <img src="{{ url_for('static', filename='images/user_icon.png') }}">
+      </div>
     </header>
+    
+    <!-- user popup html -->
+    <div class="user-popup-bg">
+        <div class="user-popup-box flex-container">
+            <div class="close">+</div>
+            <div class="user-popup-row flex-container"><p>Cài đặt</p></div>
+            <div class="user-popup-row flex-container"><p>Đăng xuất</p></div>
+        </div>
+    </div>
+    <!-- end user popup html -->
+    
     <section id="user-setting-frame">
         <div class="setting-box flex-container" id="user-setting">
+            
             <!-- Đoạn html cho phần navigate giữa thông tin cá nhân và thông tin tài khoản -->
             <div id="setting-nav-bar">
                 <button class="setting-switcher" id="person-switcher" onclick="openSetting('person-setting-box', this)">Thông tin cá nhân</button>
                 <button class="setting-switcher" id="acc-switcher" onclick="openSetting('acc-setting-box', this)">Thông tin tài khoản</button>
             </div>
+            
             <!-- Đoạn html cho phần thông tin cá nhân -->
             <div class="inner-setting-box flex-container" id="person-setting-box">
                 <div class="setting-row first-setting-row">
@@ -42,6 +58,7 @@
                     <p>Thay đổi thông tin</p>
                 </div>
             </div>
+            
             <!-- Đoạn HTML cho phần xửa đổi thông tin cá nhân -->
             <div class="inner-setting-box flex-container" id="person-setting-form">
                 <div class="setting-row first-setting-row">
@@ -69,6 +86,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- đoạn HTML cho phần thông tin tài khoản -->
             <div class="inner-setting-box flex-container" id="acc-setting-box">
                 <div class="setting-row first-setting-row">
@@ -84,6 +102,7 @@
                     <p>Thay đổi thông tin</p>
                 </div>
             </div>
+            
             <!-- Đoạn HTML cho phần xửa đổi thông tin tài khoản -->
             <div class="inner-setting-box flex-container" id="acc-setting-form">
                 <div class="setting-row first-setting-row">
@@ -110,5 +129,6 @@
         </div>
     </section>
     <script src="./login-user-setting.js"></script>
+    <script src="./user-popup.js"></script>
   </body>
 </html>
