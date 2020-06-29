@@ -6,9 +6,26 @@
   {% else %}
     <h1>Creating!</h1>
   {% endif %}
-    <form class="" action="{% url 'collect:trasaction_booking' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
+    <form class="" action="{% url 'collect:trasaction_booking' %}" method="post">{% csrf_token %}
+      {% if form.non_field_errors %}
+        <!-- html cho error chung cua form -->
+        <div class="">
+          {% for error in form.non_field_errors %}
+            <div class="">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% for field in form %}
+        <div class="">
+          {{ field.label_tag }}
+          {% if field.help_text %}
+          {% endif %}
+          {{ field }}
+          {% for error in field.errors %}
+            <div class="">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
       <input type="submit">
     </form>
 {% endblock %}

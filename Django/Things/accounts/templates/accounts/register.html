@@ -7,22 +7,28 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
     <h2>REGISTER FORM</h2>
-    <div class="form-row">
-      {{ form.email.label_tag }}
-      {{ form.email }}
-    </div>
-    <div class="form-row">
-      {{ form.full_name.label_tag}}
-      {{ form.full_name }}
-    </div>
-    <div class="form-row">
-      {{ form.password1.label_tag}}
-      {{ form.password1 }}
-    </div>
-    <div class="form-row">
-      {{ form.password2.label_tag}}
-      {{ form.password2 }}
-    </div>
+
+    {% if form.non_field_errors %}
+      <!-- html cho error chung cua form -->
+      <div class="form-row">
+        {% for error in form.non_field_errors %}
+          <div class="form-row-error">{{ error }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for field in form %}
+      <div class="form-row">
+        {{ field.label_tag }}
+        {% if field.help_text %}
+        {% endif %}
+        {{ field }}
+        {% for error in field.errors %}
+          <div class="form-row-error">{{ error }}</div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
     <div class="form-checkbox">
       <label class="container"><p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
           <input type="checkbox" name="checkbox">

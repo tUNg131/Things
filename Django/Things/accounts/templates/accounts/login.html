@@ -3,20 +3,31 @@
 {% block title %}Login{% endblock %}
 
 {% block detail_form %}
-  <form class="form-detail" action="{% url 'accounts:login' %}" method="post" id="login-form">
-    {% csrf_token %}
+  <form class="form-detail" action="{% url 'accounts:login' %}" method="post" id="login-form">{% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
     <h2>LOGIN</h2>
-    <div class="form-row">
-      <label for="your_email">Your Email</label>
-      {{ form.username }}
-    </div>
-    <div class="form-row">
-      <div class="form-row" id="form-row-password">
-        <label for="password">Password</label>
-        {{ form.password }}
+
+    {% if form.non_field_errors %}
+      <!-- html cho error chung cua form login -->
+      <div class="form-row">
+        {% for error in form.non_field_errors %}
+          <div class="form-row-error">{{ error }}</div>
+        {% endfor %}
       </div>
-    </div>
+    {% endif %}
+
+    {% for field in form %}
+      <div class="form-row">
+        {{ field.label_tag }}
+        {% if field.help_text %}
+        {% endif %}
+        {{ field }}
+        {% for error in field.errors %}
+          <div class="form-row-error">{{ error }}</div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
     <div class="form-row-last">
       <input type="submit" name="register" class="register" value="Login">
     </div>

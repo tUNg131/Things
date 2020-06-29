@@ -9,6 +9,7 @@ from .models import User
 from .forms import LoginForm, RegisterForm
 
 class LoginUser(LoginView):
+    NON_FIELD_ERRORS = 'an cut'
     template_name = 'accounts/login.html'
     form_class = LoginForm
 

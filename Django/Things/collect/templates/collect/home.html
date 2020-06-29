@@ -17,4 +17,5 @@
     {% include 'collect/next_collection.html' with next_collection_json=user_next_collection %}
     {% include 'collect/user_data.html' with user_data=user_data %}
     {% include 'collect/public_data.html' with public_data=public_data %}
+    {{ block.super }}
 {% endblock %}
