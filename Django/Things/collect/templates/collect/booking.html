@@ -19,6 +19,7 @@
         <div class="">
           {{ field.label_tag }}
           {% if field.help_text %}
+            <sup>{{ field.help_text }}</sup>
           {% endif %}
           {{ field }}
           {% for error in field.errors %}

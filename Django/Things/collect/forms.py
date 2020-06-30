@@ -1,9 +1,10 @@
 from django import forms
 from .models import Transaction
+from django.core.exceptions import ValidationError
 
 class TransactionEditForm(forms.ModelForm):
-    full_name       = forms.CharField()
-    phone           = forms.CharField()
+    full_name       = forms.CharField(required=True)
+    phone           = forms.CharField(required=True)
     class Meta:
         model = Transaction
         fields = ('collecting_date', 'address', 'detail_address')
@@ -13,23 +14,19 @@ class TransactionEditForm(forms.ModelForm):
         instance = getattr(self, 'instance', None)
         if instance:
             self.fields['full_name'].initial = instance.user.full_name
+            self.fields['full_name'].help_text = instance.user._meta.model.full_name.field.help_text
             self.fields['phone'].initial = instance.user.phone
+            self.fields['phone'].help_text = instance.user._meta.model.phone.field.help_text
 
-    # def clean_full_name(self):
-    #     pass
-
-    # def clean_phone(self):
-    #     pass
+    def _post_clean(self):
+        super()._post_clean()
+        try:
+            self.instance.user.full_clean()
+        except ValidationError as e:
+            self._update_errors(e)
 
     def save(self, commit=True):
-        transaction = super().save(commit=False)
-
-        # editing user
-        requesting_user = transaction.user
-        requesting_user.full_name = self.cleaned_data['full_name']
-        requesting_user.phone = self.cleaned_data['phone']
-        requesting_user.save()
-
-        transaction.save()
-        return transaction
-        # need to do smt here to update the full_name thing
+        self.instance.user.full_name = self.cleaned_data['full_name']
+        self.instance.user.phone = self.cleaned_data['phone']
+        self.instance.user.save()
+        return super().save()

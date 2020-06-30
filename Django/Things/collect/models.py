@@ -8,7 +8,6 @@ from django.db.models.functions import (
 )
 from django.db.models import F, Sum
 
-
 class Transaction(models.Model):
     user            = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='transactions')
     date_added  = models.DateTimeField(_('Date added'), default=timezone.now)

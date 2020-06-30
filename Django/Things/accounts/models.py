@@ -3,11 +3,11 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin
 )
-
 from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from .validators import PhoneNumberValidator
 
 class UserManager(BaseUserManager):
     def _create_user(self, full_name, email, password, **extra_fields):
@@ -43,6 +43,8 @@ class UserManager(BaseUserManager):
         return self._create_user(full_name, email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    phone_number_validator = PhoneNumberValidator()
+
     full_name       = models.CharField(
         _('Full name'),
         max_length=64,
@@ -59,8 +61,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone           = models.CharField(
         _('Phone number'),
         max_length=16,
-        blank=True
-    ) #validator missing
+        blank=True,
+        validators=[phone_number_validator],
+        help_text=_('Vietnamese phone number only e.g: +84 999999999, +84999999999 or 0999999999')
+    )
 
     is_staff        = models.BooleanField(
         _('staff status'),
