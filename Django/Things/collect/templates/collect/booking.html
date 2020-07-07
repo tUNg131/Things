@@ -1,4 +1,9 @@
 {% extends 'collect/base.html' %}
+{% load static%}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'collect/css/next-collection-form.css' %}">
+{% endblock %}
 
 {% block content %}
   {% if is_update_view %}
@@ -6,6 +11,7 @@
   {% else %}
     <h1>Creating!</h1>
   {% endif %}
+  <section class="next-collection-form-box flex-container"> 
     <form class="" action="{% url 'collect:trasaction_booking' %}" method="post">{% csrf_token %}
       {% if form.non_field_errors %}
         <!-- html cho error chung cua form -->
@@ -16,7 +22,7 @@
         </div>
       {% endif %}
       {% for field in form %}
-        <div class="">
+        <div class="next-collection-row">
           {{ field.label_tag }}
           {% if field.help_text %}
           {% endif %}
@@ -28,4 +34,5 @@
       {% endfor %}
       <input type="submit">
     </form>
+  </section> 
 {% endblock %}
