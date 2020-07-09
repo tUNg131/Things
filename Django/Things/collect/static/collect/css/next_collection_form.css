@@ -1,77 +1,11 @@
-/* universal styling */
-
-html {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 16px;
-}
-
-body {
-    margin: 0px;
-}
-
-.flex-container {
-    display: flex;
-}
-
-/* styling header */
-
-header {
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    height: 60px;
-    border-bottom: 1px solid #6A6D75;
-    background-color: white;
-    align-items: center;
-}
-
-#logo {
-    width: 50px;
-    height: 50px;
-    padding: 5px 10px;
-    margin-left: 45px;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-}
-
-nav span {
-    display: inline-block;
-    padding-left: 30px;
-    text-transform: uppercase;
-    font-size: 13px;
-}
-
-nav span a {
-    color: #6A6D75;
-    text-decoration: none;
-}
-
-nav span a:active {
-    color: inherit;
-}
-
-#user-icon {
-    width: 50px;
-    height: 50px;
-    margin: 0px 45px 0px auto;
-    cursor: pointer;
-}
-
-#user-icon > img {
-    width: 50px;
-    height: 50px;
-}
-
 /* Styling cho next collection form */
 
 .next-collection-form-box {
     width: 600px;
     height: 500px;
-    margin: 0px 0px 0px 139px;
+    margin: 0px auto auto 139px;
     padding-top: 113px;
+    position: relative;
 }
 
 .next-collection-form-box > form {
