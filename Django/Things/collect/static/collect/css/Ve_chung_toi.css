@@ -1,0 +1,174 @@
+/* universal styling */
+
+html {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    margin: 0px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+/* styling header */
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    height: 60px;
+    border-bottom: 1px solid #6A6D75;
+    background-color: white;
+    align-items: center;
+}
+
+#logo {
+    width: 50px;
+    height: 50px;
+    padding: 5px 10px;
+    margin-left: 45px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav span {
+    display: inline-block;
+    padding-left: 30px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+nav span a {
+    color: #6A6D75;
+    text-decoration: none;
+}
+
+nav span a:active {
+    color: inherit;
+}
+
+#user-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0px 45px 0px auto;
+    cursor: pointer;
+}
+
+#user-icon > img {
+    width: 50px;
+    height: 50px;
+}
+
+
+/* Styling cho user popup */
+
+.user-popup-bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.user-popup-box {
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.close {
+    margin: 10px 10px 10px auto;
+    font-size: 30px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    cursor: pointer;
+}
+
+.user-popup-row {
+    width: 80%;
+    height: 40px;
+    margin: 10px auto 20px 20px;
+    border: solid #6A6D75 1px;
+    align-items: center;
+}
+
+.user-popup-row > a {
+  text-decoration: none;
+}
+
+.user-popup-row > a > div {
+    width: 100%;
+    height: 100%;
+}
+
+.user-popup-row > a > div > p {
+    padding-left: 10px;
+    color: #6A6D75;
+}
+
+.user-popup-row > a > div > p :active {
+    color: inherit;
+}
+
+/* Styling About us sections */
+.about-us-section {
+    width: 821px;
+    height: 226px;
+    flex-direction: column;
+}
+
+#first-section {
+    margin: 0px auto auto 139px;
+    padding-top: 113px;
+}
+
+.blog {
+    width: 821px;
+    height: 193px;
+    border-radius: 17px;
+    border: 1px solid #6A6D75;
+}
+
+#first-blog{
+    background-image: url("../images/about_us_1_image.png");
+    background-repeat: no-repeat;
+}
+
+.blog > p {
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 28px auto auto 21px;
+}
+
+.more-info{
+    width: 664px;
+    height: 26px;
+    margin-left: 9.5%;
+    border: 1px solid #6A6D75;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    top: 0;
+    border-top: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.more-info > div > p > span {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}
