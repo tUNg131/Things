@@ -1,0 +1,27 @@
+/* Styling cho next collection form */
+
+.next-collection-form-box {
+    width: 600px;
+    height: 500px;
+    margin: 0px auto auto 139px;
+    padding-top: 113px;
+    position: relative;
+}
+
+.next-collection-form-box > form {
+    width: 600px;
+    height: 500px;
+    border: 1px solid #6A6D75;
+}
+
+.next-collection-row {
+    margin: 10px;
+}
+
+#collecting_date {
+    margin-top: 30px;
+}
+
+.next-collection-form-box > form > input {
+    margin-left: 10px;
+}

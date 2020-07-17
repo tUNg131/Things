@@ -122,3 +122,49 @@ nav span a:active {
 .user-popup-row > a > div > p :active {
     color: inherit;
 }
+
+/* Styling Liên Hệ */
+.top-section-position {
+    padding-top: 61px;
+    width: 100%;
+    height: 385px;
+}
+
+.top-section {
+    width: 100%;
+    height: 100%;    
+    background: url(../images/rsz_rsz_b2ad9ecd5dd475aff6f0d6bf2de29e171504c8fc_original.jpg) transparent center center no-repeat;
+    background-size: cover;
+}
+
+.search-box {
+    margin: 253px auto auto 142px;
+}
+
+.search-box > label {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.search-box > input {
+    width: 604px;
+    padding: 20px
+}
+
+.search-button {
+    width: 149px;
+    height: 60px;
+    background-color: #119822;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    margin-left: 20px;
+}
+
+.search-button > p {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
