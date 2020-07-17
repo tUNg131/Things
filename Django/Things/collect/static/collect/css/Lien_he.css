@@ -149,7 +149,8 @@ nav span a:active {
 
 .search-box > input {
     width: 604px;
-    padding: 20px
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .search-button {
