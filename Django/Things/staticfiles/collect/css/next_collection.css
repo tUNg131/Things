@@ -1,0 +1,80 @@
+/* Styling cho next_collection + no data next_collection */
+
+#next-collection {
+    position: relative;
+    height: 200px;
+    width: 904px;
+    margin: 0px auto auto 142px;
+    padding-top: 122px;
+}
+
+.next-collection-chart {
+    height: 200px;
+    width: 904px;
+    border: solid 1px black;
+}
+
+#next-collection > h1{
+    color: #6A6D75;
+    font-weight: 100;
+    font-size: 40px;
+    margin: 40px 0px 20px;
+  }
+#clockdiv{
+      font-family: sans-serif;
+      color: #fff;
+      display: inline-block;
+      font-weight: 100;
+      text-align: center;
+      font-size: 30px;
+}
+#clockdiv > div{
+      padding: 10px;
+      border-radius: 3px;
+      background: #00BF96;
+      display: inline-block;
+}
+#clockdiv div > span{
+      padding: 15px;
+      border-radius: 3px;
+      background: #00816A;
+      display: inline-block;
+}
+.smalltext{
+      padding-top: 5px;
+      font-size: 16px;
+}
+
+.next-collection-chart a {
+    text-decoration: none;
+}
+
+#button-choose-date {
+    width: 277px;
+    height: 60px;
+    display: inline-flex;
+    border: solid #6A6D75;
+    align-items: center;
+    justify-content: center;
+}
+
+#button-choose-date > p {
+    text-decoration: none;
+    color: #6A6D75;
+}
+
+#button-choose-date > p:active {
+    color: inherit;
+}
+
+.arrow {
+  border: solid #6A6D75;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
