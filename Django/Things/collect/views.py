@@ -90,3 +90,9 @@ class TransactionEditView(LoginRequiredMixin, UpdateView):
 
 class LandingPage(TemplateView):
     template_name = 'collect/landing_page.html'
+
+class LienHe(TemplateView):
+    template_name = 'collect/Lien_he.html'
+
+class VeChungToi(TemplateView):
+    template_name = 'collect/Ve_chung_toi.html'
