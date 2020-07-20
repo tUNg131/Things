@@ -9,14 +9,7 @@
 
 {% block nav %}{% endblock %}
 
-{% block header %}
-  <div id="signup-login">
-      <a href="{% url 'accounts:login' %}">Đăng nhập</a>
-      <form action="{% url 'accounts:register' %}" method="get">
-          <button id="signup-button" type="submit">Đăng kí</button>
-      </form>
-  </div>
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
   <section class="flex-container" id="instruct-box">

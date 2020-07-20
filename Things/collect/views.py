@@ -1,25 +1,21 @@
-from datetime import timedelta
 import json
-
 from django.views.generic.base import TemplateView
-from django.views.generic import UpdateView
-from django.views import View
-from django.http import HttpResponse
+from django.views.generic import UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.utils import timezone
-from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
-
-from collect.models import Transaction, Transaction_ObjectType, PublicRecord
+from collect.models import Transaction, PublicRecord
 from .forms import TransactionEditForm
+from django.shortcuts import redirect
 
-class Index(LoginRequiredMixin, TemplateView):
-    template_name = 'collect/home.html'
+from accounts.models import User
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "collect/user_detail.html"
+    context_object_name = "user"
 
     def get_context_data(self, **kwargs):
         context = {
-            'user_full_name': self.request.user.full_name,
             'user_next_collection': self.user_next_collection,
             'user_data': self.user_data,
             'public_data': self.public_data,
@@ -30,23 +26,23 @@ class Index(LoginRequiredMixin, TemplateView):
     @property
     def user_data(self):
         try:
-            by_month = list(self.request.user.completed_transactions.group_by_month())
-            by_type = list(self.request.user.completed_transactions.group_by_type())
+            by_month = list(self.object.completed_transactions.group_by_month())
+            by_type = list(self.object.completed_transactions.group_by_type())
 
             data = {
             'by_month': json.dumps(by_month),
             'by_type': json.dumps(by_type),
             }
-        except self.request.user.NoTransactionAvailable:
+        except User.NoTransactionAvailable:
             data = None
         return data
 
     @property
     def user_next_collection(self):
         try:
-            timestamp_next_collection = json.dumps(self.request.user.next_collection.timestamp() * 1000) # for miliseconds
+            timestamp_next_collection = json.dumps(self.object.next_collection.timestamp() * 1000) # for miliseconds
             # maybe better if we get the latest one and validate it in template
-        except self.request.user.NoNextCollection:
+        except User.NoNextCollection:
             timestamp_next_collection = None
         return timestamp_next_collection
 
@@ -61,6 +57,9 @@ class Index(LoginRequiredMixin, TemplateView):
         except PublicRecord.DoesNotExist:
             data = None
         return data
+
+class UserSettingsView(LoginRequiredMixin, TemplateView):
+    template_name = "collect/user_settings.html"
 
 class TransactionEditView(LoginRequiredMixin, UpdateView):
     template_name = 'collect/booking.html'
@@ -91,8 +90,14 @@ class TransactionEditView(LoginRequiredMixin, UpdateView):
 class LandingPage(TemplateView):
     template_name = 'collect/landing_page.html'
 
-class LienHe(TemplateView):
-    template_name = 'collect/Lien_he.html'
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(request.user)
+        else:
+            return super().get(request, *args, **kwargs)
 
-class VeChungToi(TemplateView):
-    template_name = 'collect/Ve_chung_toi.html'
+class Contact(TemplateView):
+    template_name = 'collect/contact.html'
+
+class AboutUs(TemplateView):
+    template_name = 'collect/about_us.html'

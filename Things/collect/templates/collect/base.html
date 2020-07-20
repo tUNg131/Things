@@ -16,33 +16,37 @@
   </head>
   <body>
     <header class="flex-container">
-        <img src="{% static 'collect/images/logo.png'%}" id="logo">
+        <a href="{% url 'collect:landing_page' %}"><img src="{% static 'collect/images/logo.png' %}" id="logo"></a>
         <nav>
-            <span><a href="">Về chúng tôi</a></span>
-            <span><a href="">Liên hệ</a></span>
+            <span><a href="{% url 'collect:about_us' %}">Về chúng tôi</a></span>
+            <span><a href="{% url 'collect:contact' %}">Liên hệ</a></span>
             {% block nav %}{% endblock %}
         </nav>
-        {% block header %}
+        {% if user.is_authenticated %}
           <div class="flex-container" id="user-icon">
             <img src="{% static 'collect/images/user_icon.png' %}">
           </div>
-        {% endblock %}
+        {% else %}
+          <div id="signup-login">
+            <a href="{% url 'accounts:login' %}">Đăng nhập</a>
+            <form action="{% url 'accounts:register' %}" method="get">
+              <button id="signup-button" type="submit">Đăng kí</button>
+            </form>
+          </div>
+        {% endif %}
+        
+        {% block header %}{% endblock %}
     </header>
-    {% block content %}
+    {% if user.is_authenticated %}
       <div class="user-popup-bg">
         <div class="user-popup-box flex-container">
               <div class="close">+</div>
-              <div class="user-popup-row flex-container"><p>Cài đặt</p></div>
-              <div class="user-popup-row flex-container">
-                <a href="{% url 'accounts:logout' %}">
-                  <div>
-                    <p>Đăng xuất</p>
-                  </div>
-                </a>
-              </div>
+              <div class="user-popup-row flex-container" onclick="location.href='{% url 'collect:user_settings' %}';"><p>Cài đặt</p></div>
+              <div class="user-popup-row flex-container" onclick="location.href='{% url 'accounts:logout' %}';"><p>Đăng xuất</p></div>
         </div>
       </div>
       <script src="{% static 'collect/js/user_popup.js' %}"></script>
-    {% endblock %}
+    {% endif %}
+    {% block content %}{% endblock %}
   </body>
 </html>

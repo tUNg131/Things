@@ -125,6 +125,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("collect:user_detail", kwargs={"pk": self.pk})
+    
     @property
     def completed_transactions(self):
         from collect.models import Transaction_ObjectType

@@ -1,57 +1,3 @@
-/* universal styling */
-
-html {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 16px;
-}
-
-body {
-    margin: 0px;
-}
-
-.flex-container {
-    display: flex;
-}
-
-/* styling header */
-
-header {
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    height: 60px;
-    border-bottom: 1px solid #6A6D75;
-    background-color: white;
-}
-
-#logo {
-    width: 50px;
-    height: 50px;
-    padding: 5px 10px;
-    margin-left: 45px;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-}
-
-nav span {
-    display: inline-block;
-    padding-left: 30px;
-    text-transform: uppercase;
-    font-size: 13px;
-}
-
-nav span a {
-    color: #6A6D75;
-    text-decoration: none;
-}
-
-nav span a:active {
-    color: inherit;
-}
-
 /* Styling user settings */
 
 #user-setting-frame {
@@ -86,15 +32,6 @@ nav span a:active {
     /* border-bottom: solid #6A6D75 1px; */
     cursor: pointer;
 }
-/* 
-#person-switcher {
-    border-right: solid #6A6D75 1px; 
-    border-bottom: solid #6A6D75 1px;
-} */
-
-/* #acc-switcher {
-    border-bottom: solid #6A6D75 1px;
-} */
 
 .inner-setting-box {
     width: 904px;
