@@ -1,16 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User as BaseUser
-from .models import User
-from collect.models import Transaction
-from django.utils.translation import gettext, gettext_lazy as _
+from .models import User, Location, Day
+from django.utils.translation import gettext_lazy as _
 
 class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'full_name', 'phone', 'is_staff', 'is_active')
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('full_name', 'phone')}),
+        (_('Personal info'), {'fields': ('full_name', 'phone', 'address', 'detail_address')}),
+        (_('Collect'), {'fields': ('collecting_day', 'collecting_time')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
@@ -27,3 +26,5 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Location)
+admin.site.register(Day)

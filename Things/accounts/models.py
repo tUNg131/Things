@@ -92,9 +92,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
 
-    collecting_day = models.ForeignKey("accounts.Day", verbose_name=_("The day to collect weekly"), on_delete=models.CASCADE)
+    collecting_day = models.ForeignKey("accounts.Day", verbose_name=_("The day to collect weekly"), on_delete=models.CASCADE, null=True, blank=True)
 
-    collecting_time = models.TimeField(_("Collecting time"), auto_now=False, auto_now_add=False)
+    collecting_time = models.TimeField(_("Collecting time"), auto_now=False, auto_now_add=False, null=True, blank=True)
 
     objects = UserManager()
 
@@ -145,10 +145,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def next_collection(self):
         from collect.models import Transaction
         try:
-            collecting_date = self.transactions.get(is_active=True).collecting_date
+            colleting_datetime = self.transactions.get(is_active=True).collecting_datetime
         except Transaction.DoesNotExist:
             raise type(self).NoNextCollection
-        return collecting_date
+        return colleting_datetime
 
 class Location(models.Model):
     city            = models.CharField(

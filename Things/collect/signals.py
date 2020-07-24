@@ -10,15 +10,18 @@ def create_new_public_record():
 
 @receiver(pre_save, sender=Transaction)
 def pre_save_check(sender, instance, **kwargs):
+    print(f"Instance pk: {instance.pk}")
     try:
         origin = sender.objects.get(pk=instance.pk)
     except sender.DoesNotExist:
+        print("Instance does not exist")
         # initialize collecting date for newly created Transaction.
         instance._update_collecting_date()
     else:
         # check if the transaction turn into not active (becoming a finished transaction). 
         # If so, create new public record and new transaction.
         if origin.is_active == True and instance.is_active == False:
+            print("Cheking if the transaction turn into not active")
             #Change is_active from True to False
             create_new_public_record()
             create_new_transaction(instance)

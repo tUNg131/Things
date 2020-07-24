@@ -4,7 +4,7 @@ from django.views.generic import UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from collect.models import Transaction, PublicRecord
-from .forms import TransactionEditForm
+# from .forms import TransactionEditForm
 from django.shortcuts import redirect
 
 from accounts.models import User
@@ -61,31 +61,31 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 class UserSettingsView(LoginRequiredMixin, TemplateView):
     template_name = "collect/user_settings.html"
 
-class TransactionEditView(LoginRequiredMixin, UpdateView):
-    template_name = 'collect/booking.html'
-    form_class = TransactionEditForm
-    success_url = reverse_lazy('collect:index')
-    is_update_view = True
+# class TransactionEditView(LoginRequiredMixin, UpdateView):
+#     template_name = 'collect/booking.html'
+#     form_class = TransactionEditForm
+#     success_url = reverse_lazy('collect:index')
+#     is_update_view = True
 
-    def get_object(self):
-        requesting_user = self.request.user
-        try:
-            transaction = Transaction.objects.filter(user_id=requesting_user.id, is_active=True).get()
-        except Transaction.DoesNotExist:
-            self.is_update_view = False
-            transaction = Transaction(user=requesting_user, address=requesting_user.address, detail_address=requesting_user.detail_address)
-            if transaction is None:
-                print("Is None!")
-            else:
-                print("Not None")
-        return transaction
+#     def get_object(self):
+#         requesting_user = self.request.user
+#         try:
+#             transaction = Transaction.objects.filter(user_id=requesting_user.id, is_active=True).get()
+#         except Transaction.DoesNotExist:
+#             self.is_update_view = False
+#             transaction = Transaction(user=requesting_user, address=requesting_user.address, detail_address=requesting_user.detail_address)
+#             if transaction is None:
+#                 print("Is None!")
+#             else:
+#                 print("Not None")
+#         return transaction
 
-    def get_context_data(self, **kwargs):
-        context = {
-            'is_update_view': self.is_update_view
-        }
-        context.update(kwargs)
-        return super().get_context_data(**context)
+#     def get_context_data(self, **kwargs):
+#         context = {
+#             'is_update_view': self.is_update_view
+#         }
+#         context.update(kwargs)
+#         return super().get_context_data(**context)
 
 class LandingPage(TemplateView):
     template_name = 'collect/landing_page.html'

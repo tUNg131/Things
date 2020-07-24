@@ -12,7 +12,7 @@ from django.db.models import F, Sum
 class Transaction(models.Model):
     user            = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='transactions')
     date_added      = models.DateTimeField(_('Date added'), default=timezone.now)
-    collecting_datetime = models.DateTimeField(_('Collecting datetime'))
+    collecting_datetime = models.DateTimeField(_('Collecting datetime'), blank=True, null=True)
     is_active       = models.BooleanField(_('Is active transaction? Required.'), default=True)
 
     def __str__(self):
@@ -24,11 +24,11 @@ class Transaction(models.Model):
     def _update_collecting_date(self):
         now = timezone.now().isocalendar()
         if self.user.collecting_day.isoday > now[2]: #need a better query
+            next_date_iso = now[:2] + (self.user.collecting_day.isoday,)
+        else:
             new_week = now[1] + 1
             next_date_iso = now[:1] + (new_week,) + (self.user.collecting_day.isoday,)
-        else:
-            next_date_iso = now[:2] + (self.user.collecting_day.isoday,)
-        new_datetime = datetime.combine(date.fromisocalendar(next_date_iso), self.user.collecting_time)
+        new_datetime = datetime.combine(date.fromisocalendar(*next_date_iso), self.user.collecting_time)
         self.collecting_datetime = new_datetime
 
 class ObjectType(models.Model):
@@ -92,7 +92,7 @@ class TransactionQuerySet(models.QuerySet):
             'objecttype__price_max',
             'objecttype__price_min',
         )\
-        .annotate(month=ExtractMonth('transaction__collecting_date'), year=ExtractYear('transaction__collecting_date'))\
+        .annotate(month=ExtractMonth('transaction__collecting_datetime'), year=ExtractYear('transaction__collecting_datetime'))\
         .values('month', 'year').order_by('year', 'month')\
         .annotate(total_quantity=Sum('quantity'))
 
