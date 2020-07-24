@@ -92,6 +92,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
 
+    collecting_day = models.ForeignKey("accounts.Day", verbose_name=_("The day to collect weekly"), on_delete=models.CASCADE)
+
+    collecting_time = models.TimeField(_("Collecting time"), auto_now=False, auto_now_add=False)
+
     objects = UserManager()
 
     EMAIL_FIELD = 'email'
@@ -173,3 +177,17 @@ class Location(models.Model):
             '32 characters or fewer.'
         )
     )
+
+class Day(models.Model):
+    name = models.CharField(_("Name of the day"), max_length=15, help_text=_("Name of the day"))
+    isoday = models.IntegerField(_("ISO Weekday"))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'Week'
+        managed = True
+
+        verbose_name = 'Day'
+        verbose_name_plural = 'Days'

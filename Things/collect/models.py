@@ -1,3 +1,4 @@
+from datetime import date, time, datetime
 import json
 
 from django.db import models
@@ -10,16 +11,9 @@ from django.db.models import F, Sum
 
 class Transaction(models.Model):
     user            = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='transactions')
-    date_added  = models.DateTimeField(_('Date added'), default=timezone.now)
-    collecting_date = models.DateTimeField(_('Collecting date'))
+    date_added      = models.DateTimeField(_('Date added'), default=timezone.now)
+    collecting_datetime = models.DateTimeField(_('Collecting datetime'))
     is_active       = models.BooleanField(_('Is active transaction? Required.'), default=True)
-    address        = models.ForeignKey('accounts.Location', on_delete=models.CASCADE, null=True, blank=True) # related_name
-    detail_address  = models.CharField(
-        _('Detail address'),
-        max_length=256,
-        help_text=_('Required for collections. 256 characters or fewer.'),
-        blank=True
-        )
 
     def __str__(self):
         transaction_objecttype_list = ""
@@ -27,6 +21,15 @@ class Transaction(models.Model):
             transaction_objecttype_list += f"[{_transaction_objectype.objecttype.type_name}: {_transaction_objectype.quantity} {_transaction_objectype.objecttype.unit}]"
         return f"({self.user}) submitted: {self.date_added} - " + transaction_objecttype_list
 
+    def _update_collecting_date(self):
+        now = timezone.now().isocalendar()
+        if self.user.collecting_day.isoday > now[2]: #need a better query
+            new_week = now[1] + 1
+            next_date_iso = now[:1] + (new_week,) + (self.user.collecting_day.isoday,)
+        else:
+            next_date_iso = now[:2] + (self.user.collecting_day.isoday,)
+        new_datetime = datetime.combine(date.fromisocalendar(next_date_iso), self.user.collecting_time)
+        self.collecting_datetime = new_datetime
 
 class ObjectType(models.Model):
     type_name            = models.CharField(
