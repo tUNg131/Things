@@ -1,9 +1,26 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save, post_init
 from django.dispatch import receiver
-from collect.models import PublicRecord, Transaction_ObjectType
+from collect.models import PublicRecord, Transaction
 
-@receiver(post_save, sender=Transaction_ObjectType)
-def update_public_record(sender, **kwargs):
+def create_new_transaction(instance):
+    Transaction.objects.create(user=instance.user)
+
+def create_new_public_record():
     PublicRecord.objects.create()
-    # Create 3 PublicRecord for 3 Transaction_ObjectType when actually only 1 transation select_related
-    # better to write Callback when active transaction turn into in-active 
+
+@receiver(pre_save, sender=Transaction)
+def pre_save_check(sender, instance, **kwargs):
+    try:
+        origin = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        # initialize collecting date for newly created Transaction.
+        instance._update_collecting_date()
+    else:
+        # check if the transaction turn into not active (becoming a finished transaction). 
+        # If so, create new public record and new transaction.
+        if origin.is_active == True and instance.is_active == False:
+            #Change is_active from True to False
+            create_new_public_record()
+            create_new_transaction(instance)
+
+    
