@@ -4,6 +4,8 @@
 {% block head %}{{ block.super }}
   <link rel="stylesheet" type="text/css" href="{% static 'collect/css/home.css' %}">
   <link rel="stylesheet" href="{% static 'collect/css/next_collection.css' %}">
+  <link rel="stylesheet" href="{% static 'collect/css/user_data_chart.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% endblock %}
 
 {% block title %}Things{% endblock %}
@@ -17,4 +19,5 @@
     {% include 'collect/widgets/user_data.html' with user_data=user_data %}
     {% include 'collect/widgets/public_data.html' with public_data=public_data %}
     {{ block.super }}
+    <script src="{% static 'collect/js/donut-chart.js' %}"></script>
 {% endblock %}
