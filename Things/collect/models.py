@@ -21,7 +21,7 @@ class Transaction(models.Model):
             transaction_objecttype_list += f"[{_transaction_objectype.objecttype.type_name}: {_transaction_objectype.quantity} {_transaction_objectype.objecttype.unit}]"
         return f"({self.user}) submitted: {self.date_added} - " + transaction_objecttype_list
 
-    def _update_collecting_date(self):
+    def update_collecting_date(self):
         now = timezone.now().isocalendar()
         if self.user.collecting_day.isoday > now[2]: #need a better query
             next_date_iso = now[:2] + (self.user.collecting_day.isoday,)

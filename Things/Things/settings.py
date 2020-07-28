@@ -135,3 +135,11 @@ os.path.join(BASE_DIR, "static"),
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'email-smtp.ap-southeast-1.amazonaws.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'AKIA5SM2MYAZMMDF4G6Q'
+EMAIL_HOST_PASSWORD = 'BAENmIt9Hgk7/WiZbRz/284gdPK+ZEXWPs1YAMo1rxtw'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'halethuy.hlt@gmail.com'

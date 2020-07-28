@@ -3,7 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block detail_form %}
-  <form class="form-detail" action="{% url 'accounts:register' %}" method="post" id="register-form" data-switcherId="login-switcher">
+  <form class="form-detail" action="{% url 'register' %}" method="post" id="register-form" data-switcherId="login-switcher">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
     <h2>REGISTER FORM</h2>
@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block form_left_last %}
-  <form action="{% url 'accounts:login' %}" method="get">
+  <form action="{% url 'login' %}" method="get">
     <input type="submit" name="account" class="account form-detail-switcher" id="login-switcher" value="Have An Account">
   </form>
 {% endblock %}

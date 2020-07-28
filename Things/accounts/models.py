@@ -131,7 +131,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("collect:user_detail", kwargs={"pk": self.pk})
+        return reverse("user_detail", kwargs={"pk": self.pk})
     
     @property
     def completed_transactions(self):

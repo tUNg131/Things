@@ -64,7 +64,7 @@ class UserSettingsView(LoginRequiredMixin, TemplateView):
 # class TransactionEditView(LoginRequiredMixin, UpdateView):
 #     template_name = 'collect/booking.html'
 #     form_class = TransactionEditForm
-#     success_url = reverse_lazy('collect:index')
+#     success_url = reverse_lazy('index')
 #     is_update_view = True
 
 #     def get_object(self):

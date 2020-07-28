@@ -16,10 +16,10 @@
   </head>
   <body>
     <header class="flex-container">
-        <a href="{% url 'collect:landing_page' %}"><img src="{% static 'collect/images/logo.png' %}" id="logo"></a>
+        <a href="{% url 'landing_page' %}"><img src="{% static 'collect/images/logo.png' %}" id="logo"></a>
         <nav>
-            <span><a href="{% url 'collect:about_us' %}">Về chúng tôi</a></span>
-            <span><a href="{% url 'collect:contact' %}">Liên hệ</a></span>
+            <span><a href="{% url 'about_us' %}">Về chúng tôi</a></span>
+            <span><a href="{% url 'contact' %}">Liên hệ</a></span>
             {% block nav %}{% endblock %}
         </nav>
         {% if user.is_authenticated %}
@@ -28,8 +28,8 @@
           </div>
         {% else %}
           <div id="signup-login">
-            <a href="{% url 'accounts:login' %}">Đăng nhập</a>
-            <form action="{% url 'accounts:register' %}" method="get">
+            <a href="{% url 'login' %}">Đăng nhập</a>
+            <form action="{% url 'register' %}" method="get">
               <button id="signup-button" type="submit">Đăng kí</button>
             </form>
           </div>
@@ -41,8 +41,8 @@
       <div class="user-popup-bg">
         <div class="user-popup-box flex-container">
               <div class="close">+</div>
-              <div class="user-popup-row flex-container" onclick="location.href='{% url 'collect:user_settings' %}';"><p>Cài đặt</p></div>
-              <div class="user-popup-row flex-container" onclick="location.href='{% url 'accounts:logout' %}';"><p>Đăng xuất</p></div>
+              <div class="user-popup-row flex-container" onclick="location.href='{% url 'user_settings' %}';"><p>Cài đặt</p></div>
+              <div class="user-popup-row flex-container" onclick="location.href='{% url 'logout' %}';"><p>Đăng xuất</p></div>
         </div>
       </div>
       <script src="{% static 'collect/js/user_popup.js' %}"></script>
