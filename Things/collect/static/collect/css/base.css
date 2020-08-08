@@ -65,6 +65,39 @@ nav span a:active {
     height: 50px;
 }
 
+/* styling for signup + login in header */
+
+#signup-login {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 45px;
+}
+
+#signup-login a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #6A6D75;
+    font-size: 13px;
+}
+
+#signup-login a:active {
+    color: inherit;
+}
+
+#signup-button {
+    width: 110px;
+    height: 34px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    background-color: #EA672B;
+    cursor: pointer;
+    border: none;
+    color: white;
+    margin-left: 30px;
+    border-radius: 5px;
+}
 
 /* Styling cho user popup */
 
@@ -124,37 +157,4 @@ nav span a:active {
     color: inherit;
 }
 
-/* styling for signup + login in header */
-
-#signup-login {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    margin-right: 45px;
-}
-
-#signup-login a {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #6A6D75;
-    font-size: 13px;
-}
-
-#signup-login a:active {
-    color: inherit;
-}
-
-#signup-button {
-    width: 110px;
-    height: 34px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px;
-    text-transform: uppercase;
-    background-color: #EA672B;
-    cursor: pointer;
-    border: none;
-    color: white;
-    margin-left: 30px;
-    border-radius: 5px;
-}
 
