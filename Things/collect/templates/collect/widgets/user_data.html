@@ -1,6 +1,9 @@
 {% load static %}
 {% if user_data %}
   <h3>Have user data</h3>
+  <script type="text/javascript">
+    var user_data = {{ user_data|safe }}
+  </script>
   <div id="by_type.chart" style="width: 700px; height: 300px;"></div>
 {% else %}
   <h3>Doesn't have user data</h3>

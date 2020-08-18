@@ -1,6 +1,9 @@
 {% load static %}
 {% if user_data %}
   <h3>Have public data</h3>
+  <script type="text/javascript">
+    var public_data = {{ public_data|safe }}
+  </script>
 {% else %}
   <h3>Doesn't have public data</h3>
 {% endif %}
