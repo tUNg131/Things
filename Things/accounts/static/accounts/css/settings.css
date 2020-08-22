@@ -1,0 +1,29 @@
+/* Styling main form */
+.container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.main-form {
+    width: 500px;
+    margin: auto;
+    padding-top: 113px;
+}
+
+.time-picker {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.time-picker p {
+    margin-bottom: .5rem;
+}
+
+.btn-submit-form {
+    float: right;
+}
+
+/* Styling footer */
+footer {
+    height: 200px;
+}
