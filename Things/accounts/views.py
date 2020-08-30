@@ -1,57 +1,18 @@
-from django.contrib.auth.views import (
-    LoginView, 
-    LogoutView, 
-    PasswordChangeView, 
-    PasswordChangeDoneView,
-    PasswordResetView,
-    PasswordResetDoneView,
-    PasswordResetConfirmView,
-    PasswordResetCompleteView,
-)
-from django.views.generic import UpdateView, CreateView
+from django.contrib.auth.views import PasswordChangeView as BasePasswordChangeView
+from django_registration.backends.activation.views import (
+    RegistrationView as BaseRegistrationView, 
+    ActivationView as BaseActivationView,
+    )   
 from django.urls import reverse_lazy
 from django.core.exceptions import ImproperlyConfigured
+from django.template.loader import render_to_string
 
-from .models import User
-from .forms import (
-    LoginForm, 
-    RegisterForm, 
-    SettingsForm, 
-    PasswordChangeUserForm, 
-    PasswordResetUserForm, 
-    SetPasswordUserForm,
-)
+from .forms import PasswordChangeUserForm
 
-class LoginUser(LoginView):
-    template_name = 'accounts/login.html'
-    form_class = LoginForm
-
-class RegisterUser(CreateView):
-    template_name = 'accounts/register.html'
-    form_class = RegisterForm
-    
-    def form_valid(self, form):
-        # send_email()
-        return super().form_valid(form)
-
-class Settings(UpdateView):
-    template_name = 'accounts/settings.html'
-    model = User
-    form_class = SettingsForm
-
-class LogoutUser(LogoutView):
-    next_page = reverse_lazy('landing_page')
-
-class PasswordChangeUser(PasswordChangeView):
+class PasswordChangeView(BasePasswordChangeView):
     success_url = reverse_lazy('password_change_done')
-    template_name = 'change_password_form.html'
+    template_name = 'password_change_form.html'
     form_class = PasswordChangeUserForm
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        print(context['form'].fields['old_password'].label)
-        print(context['form'].as_p())
-        return context
 
     def get_success_url(self):
         try:
@@ -60,20 +21,49 @@ class PasswordChangeUser(PasswordChangeView):
             url = self.request.user.get_absolute_url()
         return url
 
+class RegistrationView(BaseRegistrationView):
+    email_body_html_template = 'accounts/activation_email_body.html'
+    email_body_template = 'accounts/activation_email_body.txt'
+    email_subject_template = 'accounts/activation_email_subject.txt'
 
-class PasswordChangeDoneUser(PasswordChangeDoneView):
-    template_name = 'password_change_success.html'
+    def send_activation_email(self, user):
+        """
+        Send the activation email. The activation key is the username,
+        signed using TimestampSigner.
+        """
+        activation_key = self.get_activation_key(user)
+        context = self.get_email_context(activation_key)
+        context["user"] = user
+        subject = render_to_string(
+            template_name=self.email_subject_template,
+            context=context,
+            request=self.request,
+        )
+        # Force subject to a single line to avoid header-injection
+        # issues.
+        subject = "".join(subject.splitlines())
+        body = render_to_string(
+            template_name=self.email_body_template,
+            context=context,
+            request=self.request,
+        )
+
+        html_message = render_to_string(
+            template_name=self.email_body_html_template,
+            context=context,
+            request=self.request,
+        )
+
+        user.email_user(subject, body, html_message=html_message)
+
+class ActivationView(BaseActivationView):
+    template_name = 'accounts/activation_failed.html',
+    success_url = reverse_lazy('activation_complete')
     
-class PasswordResetUser(PasswordResetView):
-    template_name = 'password_reset.html'
-    form_class = PasswordResetUserForm
-
-class PasswordResetDoneUser(PasswordResetDoneView):
-    template_name = 'password_reset_letter.html'
-
-class PasswordResetConfirmUser(PasswordResetConfirmView):
-    template_name = 'enter_new_password.html'
-    form_class = SetPasswordUserForm
-
-class PasswordResetCompletleUser(PasswordResetCompleteView):
-    template_name = 'password_reset_success.html'
+    def activate(self, *args, **kwargs):
+        try:
+            user = super().activate(*args, **kwargs)
+        except:
+            print('error!')
+        else:
+            print('-----------------No error----------------')

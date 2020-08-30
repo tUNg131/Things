@@ -96,8 +96,3 @@ class LandingPage(TemplateView):
         else:
             return super().get(request, *args, **kwargs)
 
-class Contact(TemplateView):
-    template_name = 'collect/contact.html'
-
-class AboutUs(TemplateView):
-    template_name = 'collect/about_us.html'
