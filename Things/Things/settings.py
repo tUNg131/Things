@@ -60,7 +60,7 @@ ROOT_URLCONF = 'Things.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -139,7 +139,9 @@ AUTH_USER_MODEL = 'accounts.User'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email-smtp.ap-southeast-1.amazonaws.com'
 EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'AKIA5SM2MYAZMMDF4G6Q'
-EMAIL_HOST_PASSWORD = 'BAENmIt9Hgk7/WiZbRz/284gdPK+ZEXWPs1YAMo1rxtw'
+EMAIL_HOST_USER = 'AKIA5SM2MYAZA3CYIB2I'
+EMAIL_HOST_PASSWORD = 'BAY6MBCPDkxYAfqONn5QemBfDB+lyKu2wb27rOxB2HI3'
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'halethuy.hlt@gmail.com'
+
+ACCOUNT_ACTIVATION_DAYS = 1

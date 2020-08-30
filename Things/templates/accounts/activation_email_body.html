@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,7 +7,7 @@
 
     <link rel="stylesheet" href="../static/css/mdb.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style_site_for_email.css">
+    <link rel="stylesheet" href="{% static 'collect/css/activation_email_body.html' %}">
   </head>
   <body>
 
@@ -21,12 +22,19 @@
                     <div class="col-md-12 main-img">
                         <img src="../static/images/seedlingshands-1000.jpg">
                     </div>
-
+                    <p>
+                      Chào bạn {{ user.get_short_name }}<br>
+                      Bạn nhận được thư này vì bạn đã đăng kí tài khoản tại {{ site.name }}<br>
+                      Vui lòng click vào link dưới để hoàn tất kích hoạt tài khoản.<br>
+                      Link sẽ hết hạn trong vòng {{ expiration_days }} ngày<br>
+                      Cảm ơn bạn,<br>
+                      Tung
+                    </p>
                     <div class="col-md-12">
                       <p>
                         Ấn link bên dưới để xác nhận tài khoản của bạn
                       </p>
-                      <a href="">//  link sẽ ở đây  //</a>
+                      <a href="{{ scheme }}://{{ site.domain }}{% url 'activate' activation_key=activation_key %}">Kích hoạt</a>
                     </div>
                 </div>
                 <hr>
