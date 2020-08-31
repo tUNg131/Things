@@ -2,8 +2,8 @@ function convert(arr) {
     var labels = []
     var values = []
     for (let i = 0; i < arr.length; i++) {
-        labels.push(arr.type_name)
-        values.push(arr.total_quantity)
+        labels.push(arr[i].type_name)
+        values.push(arr[i].total_quantity)
     }
     var result = {
         "labels": labels,
@@ -20,7 +20,9 @@ var public_data = {
 }
 // ở đây by_month bị lỗi tôi chỉ chuyển by_type 
 
-var result = convert(public_data.by_type);
+// phải parse sang dạng JSON trước khi xử lý
+by_type = JSON.parse(public_data.by_type);
+var result = convert(by_type);
 
 var arr1 = result.labels;
 var arr2 = result.values;
