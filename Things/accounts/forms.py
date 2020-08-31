@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
-from django.forms import ModelForm, BooleanField
-from .models import User
+from django import forms
+from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+
+UserModel = get_user_model()
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -11,10 +13,10 @@ class LoginForm(AuthenticationForm):
 
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = UserModel
         fields = ('full_name', 'email')
 
-class SettingsForm(ModelForm):
+class SettingsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].disabled = True
@@ -22,7 +24,7 @@ class SettingsForm(ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = User
+        model = UserModel
         fields = ['full_name', 'email', 'phone', 'address', 'detail_address', 'collecting_day', 'collecting_time']
 
 class PasswordChangeUserForm(PasswordChangeForm):
@@ -42,3 +44,4 @@ class SetPasswordUserForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
