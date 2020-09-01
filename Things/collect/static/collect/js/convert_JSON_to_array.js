@@ -1,4 +1,4 @@
-function convert(arr) {
+function convertJSONToArray(arr) {
     var labels = []
     var values = []
     for (let i = 0; i < arr.length; i++) {
@@ -39,3 +39,5 @@ console.log(arr2)
 //dạng array expected output
 // var arr1 = ['niken', 'Hop kim', 'Inox']
 // var arr2 = [13, 22, 36,]
+
+export default convertJSONToArray;
