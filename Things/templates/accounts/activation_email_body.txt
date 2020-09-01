@@ -1,6 +1,6 @@
 Chào bạn {{ user.get_short_name }}
 Bạn nhận được thư này vì bạn đã đăng kí tài khoản tại {{ site.name }}
-Vui lòng click vào {{ scheme }}://{{ site.domain }}{% url 'activate' activation_key=activation_key %} để hoàn tất kích hoạt tài khoản.
+Vui lòng click vào {{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %} để hoàn tất kích hoạt tài khoản.
 Link sẽ hết hạn trong vòng {{ expiration_days }} ngày
 Cảm ơn bạn,<br>
 Tung

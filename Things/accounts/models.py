@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from .validators import PhoneNumberValidator
+from .validators import phone_number_validator, email_validator
 
 class UserManager(BaseUserManager):
     def _create_user(self, full_name, email, password, **extra_fields):
@@ -43,8 +43,6 @@ class UserManager(BaseUserManager):
         return self._create_user(full_name, email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    phone_number_validator = PhoneNumberValidator()
-
     full_name       = models.CharField(
         _('Full name'),
         max_length=64,
@@ -55,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('Email address'),
          unique=True,
          max_length=64,
+         validators=[email_validator],
          help_text=_('Required. 64 characters or fewer.')
     )
 
