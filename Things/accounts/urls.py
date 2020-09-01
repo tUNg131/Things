@@ -17,7 +17,6 @@ from django.contrib.auth.views import (
 
 from .forms import (
     LoginForm,
-    RegisterForm,
     SettingsForm,
     PasswordResetUserForm,
     SetPasswordUserForm,
@@ -45,12 +44,7 @@ urlpatterns = [
 
     path(
         'register/',
-        RegistrationView.as_view(
-            template_name='accounts/registration_form.html',
-            form_class=RegisterForm,
-            success_url=reverse_lazy('register_complete'),
-            disallowed_url=reverse_lazy("register_disallowed"),
-        ),
+        RegistrationView.as_view(), 
         name='register',
     ),
 
@@ -63,18 +57,8 @@ urlpatterns = [
     ),
 
     path(
-        "activate/complete/",
-        TemplateView.as_view(
-            template_name="accounts/activation_complete.html"
-        ),
-        name="activation_complete",
-    ),
-
-    path(
-        "activate/<str:activation_key>/",
-        ActivationView.as_view(
-    
-        ),
+        "activate/<uidb64>/<token>/",
+        ActivationView.as_view(),
         name="activate",
     ),
 
