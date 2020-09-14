@@ -21,15 +21,31 @@
           <div class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">Đăng nhập</h5>
-              <form class="form-signin">
-                <div class="form-label-group">
-                  <input type="email" id="login-email" class="form-control" placeholder="Email" required autofocus>
-                  <label for="login-email">Địa chỉ Email</label>
+              <form method="post" class="form-signin">{% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                {% if form.non_field_errors %}
+                <!-- html cho error chung cua form login -->
+                <div class="form-row">
+                {% for error in form.non_field_errors %}
+                <div class="form-row-error">{{ error }}</div>
+                {% endfor %}
                 </div>
-  
+                {% endif %}
+
                 <div class="form-label-group">
-                  <input type="password" id="login-password" class="form-control" placeholder="Mật khẩu" required>
-                  <label for="login-password">Mật khẩu</label>
+                  {{ form.username }}
+                  <label for="{{ form.username.id_for_label }}">Địa chỉ Email</label>
+                  {% for error in field.errors %}
+                    <div class="form-row-error">{{ error }}</div>
+                  {% endfor %}
+
+                <div class="form-label-group">
+                  {{ form.password }}
+                  <label for="{{ form.password.id_for_label }}">Mật khẩu</label>
+                  {% for error in field.errors %}
+                    <div class="form-row-error">{{ error }}</div>
+                  {% endfor %}
                 </div>
   
                 <div class="custom-control custom-checkbox mb-3">

@@ -28,7 +28,7 @@ urlpatterns = [
     path(
         'login/',
         LoginView.as_view(
-            template_name='accounts/login.html',
+            template_name='accounts/login1.html',
             form_class=LoginForm,
         ),
         name='login'
