@@ -1,4 +1,5 @@
 {% load static %}
+{% load addclass %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -34,14 +35,14 @@
                 {% endif %}
 
                 <div class="form-label-group">
-                  {{ form.username }}
+                  {{ form.username|addclass:'form-control' }}
                   <label for="{{ form.username.id_for_label }}">Địa chỉ Email</label>
                   {% for error in field.errors %}
                     <div class="form-row-error">{{ error }}</div>
                   {% endfor %}
 
                 <div class="form-label-group">
-                  {{ form.password }}
+                  {{ form.password|addclass:'form-control' }}
                   <label for="{{ form.password.id_for_label }}">Mật khẩu</label>
                   {% for error in field.errors %}
                     <div class="form-row-error">{{ error }}</div>
