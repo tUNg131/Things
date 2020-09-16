@@ -72,7 +72,9 @@ urlpatterns = [
 
     path(
         "password/change/",
-        PasswordChangeView.as_view(),
+        PasswordChangeView.as_view(
+            template_name='accounts/password_change_form.html'
+        ),
         name='password_change',
     ),
 
