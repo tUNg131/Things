@@ -12,8 +12,6 @@
 
 {% block nav %}
   <span>{{ user.full_name }}</span>
-  <span><a href="{% url 'password_change' %}">Password Change</a></span>
-  <span><a href="{% url 'password_reset' %}">Password Reset</a></span>
 {% endblock %}
 
 {% block content %}
@@ -23,3 +21,4 @@
     {{ block.super }}
     <script src="{% static 'collect/js/donut-chart.js' %}"></script>
 {% endblock %}
+dd
