@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/css/change_password_form.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/login_form_bootstrap4.css">
+    
+    <title>Change Password</title>
+  </head>
+  <body>
+    <!-- Login form -->
+    <!-- outside container -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Đăng kí</h5>
+              <form class="form-signin">
+                <div class="form-label-group">
+                  <input type="email" id="login-email" class="form-control" placeholder="Email" required autofocus>
+                  <label for="login-email">Địa chỉ Email</label>
+                </div>
+  
+                <div class="form-label-group">
+                  <input type="password" id="login-password" class="form-control" placeholder="Mật khẩu" required>
+                  <label for="login-password">Mật khẩu</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="password" id="cf-login-password" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                    <label for="cf-login-password">Xác nhận mật khẩu</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="text" id="full-name" class="form-control" placeholder="Họ và tên" required>
+                  <label for="full-name">Họ và tên</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="text" id="address" class="form-control" placeholder="Địa chỉ" required>
+                  <label for="cf-login-password">Địa chỉ</label>
+                </div>
+
+                <fieldset class="form-group">
+                  <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Giới tính</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="select-gender" id="male-gender" value="option1" >
+                        <label class="form-check-label" for="male-gender">
+                          Nam
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="select-gender" id="female-gender" value="option2">
+                        <label class="form-check-label" for="female-gender">
+                          Nữ
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="select-gender" id="other-gender" value="option2">
+                        <label class="form-check-label" for="other-gender">
+                          Khác
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div class="form-label-group">
+                  <input type="number" id="address" class="form-control" placeholder="Tuổi" required>
+                  <label for="cf-login-password">Tuổi</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="number" id="address" class="form-control" placeholder="Số điện thoại" required>
+                  <label for="cf-login-password">Số điện thoại</label>
+                </div>
+  
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Tôi đồng ý với các điều khoản sử dụng</label>
+                </div>
+                <button class="btn btn-lg btn-block text-uppercase login-btn" type="submit">Đăng kí</button>
+                <hr class="my-4">
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Đăng kí với google</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+  </body>
+</html>
