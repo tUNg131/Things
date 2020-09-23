@@ -9,7 +9,21 @@
 
 {% block nav %}{% endblock %}
 
-{% block header %}{% endblock %}
+{% block header %}
+<!-- Background image -->
+<div class="p-5 text-center bg-image view"  id="call-to-action-img">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.5);">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Things</h1>
+          <h4 class="mb-3">Cùng xây dựng thói quen tái chế rác thải</h4>
+          <a class="btn btn-outline-light btn-lg" href="#!" role="button">Đăng kí ngay!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+{% endblock %}
 
 {% block content %}
   <section class="flex-container" id="instruct-box">
@@ -33,3 +47,8 @@
       </div>
   </section>
 {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+  </body>
+</html>
